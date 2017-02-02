@@ -19,7 +19,7 @@ namespace FixMens.BLL
             string firebirdServer = ConfigurationManager.AppSettings["firebird.server"];
             //conn.ConnectionString = "User=SYSDBA;Password=masterkey;Database=localhost:C:\\service.fdb;DataSource=localhost;" +
             //"Port=3050;Dialect=3;Charset=NONE;Role=;Connection lifetime=15;Pooling=true;" +
-            //"MinPoolSize=0;MaxPoolSize=50;Packet Size=8192;ServerType=0;";
+            //"MinPoolSize=0;MaxPoolSize=50;Packet Size=8192;ServerType=0;";.
             conn.ConnectionString = "User=SYSDBA;Password=masterkey;Database=" + firebirdServer +
                ";Port=3050;Dialect=3;Charset=NONE;Role=;Connection lifetime=15;Pooling=true;" +
                "MinPoolSize=0;MaxPoolSize=50;Packet Size=8192;ServerType=0;";
