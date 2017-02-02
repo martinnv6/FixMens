@@ -20,7 +20,7 @@ namespace FixMens.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            Admin.getContarReparaciones();
+            Admin.GetContarReparaciones();
             return View();
         }
     }

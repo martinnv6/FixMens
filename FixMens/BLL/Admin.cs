@@ -10,7 +10,7 @@ namespace FixMens.BLL
 {
     public class Admin
     {
-        public void getContarReparaciones()
+        public void GetContarReparaciones()
         {
             FbConnection conn = new FbConnection();
             FbCommand cmd = new FbCommand();
