@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "ConsultarOrden";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConsultarOrden</h2>
+
+<div class="row">
+    <form class="col s12 formOrden" id="formOrden">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="orden" type="number" maxlength="5" max="99999" class="validate required" required="" aria-required="true">
+                <label for="last_name"># Orden</label>
+            </div>
+            <div class="input-field col s6">
+                <input maxlength="10" pattern=".{5,10}" placeholder="Cualquier parte de tu nombre o apellido (Min 5 caracteres)" id="nombre" type="text" class="validate required" required="" aria-required="true">
+                <label for="first_name">Nombre</label>
+            </div>
+
+        </div>
+        <div class="row">
+            <a href="#" class="waves-effect waves-light btn jsConsultarOrden" type="submit">Consultar</a>
+        </div>
+        
+        
+    </form>
+
+</div>
+<div id="detalleOrden">
+    
+</div>
+<script>
+    window.consultarOrdenAction = "@Url.Action("DetalleOrden")";
+</script>
+@Scripts.Render("~/bundles/ConsultarOrden")

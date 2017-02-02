@@ -1,0 +1,73 @@
+﻿@model FixMens.Models.OrdenModel
+@{
+    Layout = null;
+}
+
+@{
+    if (@Model.NombreCliente != null)
+    {
+        <div class="row">
+            <div class="input-field col s12">
+                <input readonly id="nombre" type="text" value="@Model.NombreCliente">
+                <label for="infoTecnico">Nombre</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea readonly id="infoCliente" class="materialize-textarea">@Model.InfoCliente</textarea>
+                <label for="infoCliente">Informe al cliente</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea readonly id="infoTecnico" class="materialize-textarea">@Model.InfoTecnico</textarea>
+                <label for="infoTecnico">Informe técnico</label>
+            </div>
+        </div>
+
+        <div class="input-field col s6">
+            <input readonly id="tecnico" type="text" value="@Model.Tecnico">
+            <label for="tecnico">Técnico asignado</label>
+        </div>
+        <div class="input-field col s6">
+            <input readonly id="presupuesto" type="text" value="@Model.Presupuesto">
+            <label for="precio">Presupuesto</label>
+        </div>
+        <div class="input-field col s6">
+            <input readonly id="precio" type="text" value="@Model.Precio">
+            <label for="precio">Precio servicio</label>
+        </div>
+        @*<div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    This is an inline input field:
+                    <div class="input-field inline">
+                        <input id="email" type="email" class="validate">
+                        <label for="email" data-error="wrong" data-success="right">Email</label>
+                    </div>
+                </div>
+            </div>*@
+    }
+    else
+    {
+        <div class="row">
+            <div class="col s12">
+                This is an inline input field:
+                <div class="input-field inline">
+                    <input id="email" type="email" class="validate">
+                    <label for="email" data-error="wrong" data-success="right">No se encontro la orden</label>
+                </div>
+            </div>
+        </div>
+    }}
