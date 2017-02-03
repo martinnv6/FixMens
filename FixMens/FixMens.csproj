@@ -315,6 +315,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Tools\service.fdb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
