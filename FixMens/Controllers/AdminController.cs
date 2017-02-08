@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FixMens.BLL;
+using FixMens.Models.ViewModels;
 
 namespace FixMens.Controllers
 {
@@ -20,8 +21,12 @@ namespace FixMens.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            Admin.GetContarReparaciones();
-            return View();
+            AdminViewModel model = new AdminViewModel
+            {
+                EquiposEnTaller = Admin.GetTotalesEquiposEnTaller(),
+                Ventas = Admin.GetVentasDia()
+            };
+            return View(model);
         }
     }
 }

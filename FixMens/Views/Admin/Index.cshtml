@@ -1,8 +1,70 @@
-﻿
+﻿@model FixMens.Models.ViewModels.AdminViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Panel de Administrador</h2>
 
+<div class="row">
+    <div class="col s6">
+        <h5>Equipos en taller</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.EquiposEnTaller)
+            {
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                </tr>
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        <h5>Ventas</h5>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>
+                        Descripción
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Ventas)
+            {
+                    <tr>
+                        <th>
+                            @item.Description
+                        </th>
+                        <th>
+                            @item.Cant
+                        </th>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
