@@ -24,7 +24,9 @@ namespace FixMens.Controllers
             AdminViewModel model = new AdminViewModel
             {
                 EquiposEnTaller = Admin.GetTotalesEquiposEnTaller(),
-                Ventas = Admin.GetVentasDia()
+                Ventas = Admin.GetVentasDia(),
+                Egresos = Admin.GetEgresos(),
+                ReparacionesPorTecnico = Admin.GetReparacionesPorTecnico()
             };
             return View(model);
         }

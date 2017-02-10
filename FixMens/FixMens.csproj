@@ -249,8 +249,6 @@
     <Content Include="SchemaQueries\PrimaryKeyQuery.txt" />
     <Content Include="SchemaQueries\ProceduresQuery.txt" />
     <Content Include="SchemaQueries\TablesQuery.txt" />
-    <Content Include="Scripts\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\AppScripts\ConsultarOrden.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="ApplicationInsights.config">
@@ -341,12 +339,12 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
-    <Content Include="Tools\service.fdb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\roboto\" />
     <Folder Include="Repository\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

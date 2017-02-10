@@ -9,5 +9,9 @@ namespace FixMens.Models.ViewModels
     {
         public List<AdminInfoModel> EquiposEnTaller { get; set; }
         public List<AdminInfoModel> Ventas { get; set; }
+        public List<AdminInfoModel> Egresos { get; set; }
+        public List<AdminInfoModel> ReparacionesPorTecnico { get; set; }
+
+        
     }
 }

@@ -38,33 +38,116 @@
         </table>
     </div>
     <div class="col s6">
-        <h5>Ventas</h5>
+        <h5>Reparaciones por técnico</h5>
         <table class="striped">
             <thead>
-                <tr>
-                    <th>
-                        Descripción
-                    </th>
-                    <th>
-                        Cantidad
-                    </th>
-                </tr>
+            <tr>
+                <th>
+                    Técnico
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Ventas)
+            @foreach (var item in Model.ReparacionesPorTecnico)
             {
-                    <tr>
-                        <th>
-                            @item.Description
-                        </th>
-                        <th>
-                            @item.Cant
-                        </th>
-                    </tr>
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                </tr>
 
-                }
+            }
 
             </tbody>
         </table>
     </div>
 </div>
+<input type="password" id="password"/><input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas"/>
+<div class="row hide" id="ventas">
+    <div class="col s6">
+        <h5>Ventas</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Ventas)
+            {
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        $@item.Cant.00
+                    </th>
+                </tr>
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        <h5>Egresos</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Egresos)
+            {
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        $@item.Cant.00
+                    </th>
+                </tr>
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    (function ($) {
+        $(function () {
+
+            $("#btnVentas").click(function () {
+                if ($("#password").val() === "nasa290" || $("#password").val() === "1123581321") {
+                    $("#ventas").removeClass("hide");
+                    $("#password").addClass("hide");
+                    $("#btnVentas").addClass("hide");
+                }
+                
+                });
+
+        });
+
+
+        // end of document ready
+    })($); // end of jQuery name space
+</script>
