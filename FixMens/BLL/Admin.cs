@@ -6,6 +6,7 @@ using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using AutoMapper;
 using FirebirdSql.Data.FirebirdClient;
 using FixMens.Models;
 
@@ -30,6 +31,7 @@ namespace FixMens.BLL
             conn.Open();
             da.SelectCommand = cmd;
             da.Fill(dt);
+
             conn.Close();
 
             foreach (DataRow row in dt.Rows)
@@ -44,6 +46,7 @@ namespace FixMens.BLL
 
             return list;
         }
+
         public int GetContarReparaciones(int estadoId)
         {
             FbConnection conn = new FbConnection();
@@ -131,6 +134,9 @@ namespace FixMens.BLL
             conn.Open();
             da.SelectCommand = cmd;
             da.Fill(dt);
+
+
+
             conn.Close();
 
             foreach (DataRow row in dt.Rows)
@@ -161,7 +167,7 @@ namespace FixMens.BLL
             cmd.CommandText =
                 "select INTEGRANTES.NOMBRES, count(*) as Cantidad from REPARACIONES " +
                 "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO " +
-                "where REPARACIONES.FECHATERMINADO = '"+ toDay + "' " +
+                "where REPARACIONES.FECHATERMINADO = '" + toDay + "' " +
                 "Group by INTEGRANTES.NOMBRES";
 
             cmd.CommandType = CommandType.Text;
@@ -169,7 +175,10 @@ namespace FixMens.BLL
 
             conn.Open();
             da.SelectCommand = cmd;
+
+
             da.Fill(dt);
+
             conn.Close();
 
             foreach (DataRow row in dt.Rows)
@@ -177,11 +186,53 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 ventas.Add(new AdminInfoModel
                 {
-                    Description =row[0].ToString(),
+                    Description = row[0].ToString(),
                     Cant = int.Parse(row[1].ToString())
                 });
             }
             return ventas;
         }
+
+        public List<AdminInfoModel> GetEquiposIngresados()
+        {
+            var equiposIngresados = new List<AdminInfoModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "SELECT FIRST 7 FECHAINGRESO AS FECHA, COUNT(*) AS CANTIDAD FROM REPARACIONES " +
+                "WHERE FECHAINGRESO IS NOT NULL " +
+                "GROUP BY FECHAINGRESO " +
+                "ORDER BY FECHAINGRESO DESC ";
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                equiposIngresados.Add(new AdminInfoModel
+                {
+                    Description = row[0].ToString(),
+                    Cant = int.Parse(row[1].ToString())
+                });
+            }
+            return equiposIngresados;
+
+            }
     }
+
 }

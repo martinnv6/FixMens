@@ -68,6 +68,69 @@
         </table>
     </div>
 </div>
+<div class="row">
+    <div class="col s6">
+        <h5>Equipos Ingresados a taller</h5>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EquiposIngresados
+                    )
+            {
+                    <tr>
+                        <th>
+                            @item.Description
+                        </th>
+                        <th>
+                            @item.Cant
+                        </th>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+    @*<div class="col s6">
+        <h5>Reparaciones por técnico</h5>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>
+                        Técnico
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ReparacionesPorTecnico)
+            {
+                    <tr>
+                        <th>
+                            @item.Description
+                        </th>
+                        <th>
+                            @item.Cant
+                        </th>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>*@
+</div>
 <input type="password" id="password"/><input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas"/>
 <div class="row hide" id="ventas">
     <div class="col s6">
