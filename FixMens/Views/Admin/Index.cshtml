@@ -100,8 +100,8 @@
             </tbody>
         </table>
     </div>
-    @*<div class="col s6">
-        <h5>Reparaciones por técnico</h5>
+    <div class="col s6">
+        <h5>Reparaciones por técnico - Ultimas dos semanas</h5>
         <table class="striped">
             <thead>
                 <tr>
@@ -109,27 +109,40 @@
                         Técnico
                     </th>
                     <th>
-                        Cantidad
+                        Anterior
+                    </th>
+                    @*<th>
+                        Técnico
+                    </th>*@
+                    <th>
+                        Actual
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.ReparacionesPorTecnico)
+                @foreach (var item in Model.ReparacionesPorTecnicoSemana)
             {
-                    <tr>
-                        <th>
-                            @item.Description
-                        </th>
-                        <th>
-                            @item.Cant
-                        </th>
-                    </tr>
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                
+                    @*<th>
+                        @item.Description2
+                    </th>*@
+                    <th>
+                        @item.Cant2
+                    </th>
+                </tr>
 
                 }
 
             </tbody>
         </table>
-    </div>*@
+    </div>
 </div>
 <input type="password" id="password"/><input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas"/>
 <div class="row hide" id="ventas">

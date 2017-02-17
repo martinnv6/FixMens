@@ -153,7 +153,8 @@ namespace FixMens.BLL
 
         public List<AdminInfoModel> GetReparacionesPorTecnico()
         {
-            string toDay = DateTime.Now.ToString("yyyy-MM-dd");
+
+            var toDay = DateTime.Now;
 
             var ventas = new List<AdminInfoModel>();
             FbConnection conn = new FbConnection();
@@ -167,8 +168,9 @@ namespace FixMens.BLL
             cmd.CommandText =
                 "select INTEGRANTES.NOMBRES, count(*) as Cantidad from REPARACIONES " +
                 "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO " +
-                "where REPARACIONES.FECHATERMINADO = '" + toDay + "' " +
+                "where REPARACIONES.FECHATERMINADO = '" + toDay.ToString("yyyy-MM-dd") + "' " +
                 "Group by INTEGRANTES.NOMBRES";
+
 
             cmd.CommandType = CommandType.Text;
 
@@ -179,6 +181,7 @@ namespace FixMens.BLL
 
             da.Fill(dt);
 
+
             conn.Close();
 
             foreach (DataRow row in dt.Rows)
@@ -188,6 +191,63 @@ namespace FixMens.BLL
                 {
                     Description = row[0].ToString(),
                     Cant = int.Parse(row[1].ToString())
+                });
+            }
+            return ventas;
+        }
+
+        public List<AdminInfoModelUnion> GetReparacionesPorTecnicoSemanal()
+        {
+
+            var toDay = DateTime.Now;
+
+            var ventas = new List<AdminInfoModelUnion>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            int dayOfWeek = (int)toDay.DayOfWeek;
+            DateTime startOfWeek = toDay.AddDays(-dayOfWeek);
+            cmd.CommandText =
+             "with t1 as (select INTEGRANTES.NOMBRES , count(*) as Cantidad from REPARACIONES " +
+             "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
+             "where REPARACIONES.FECHATERMINADO BETWEEN '" + startOfWeek.AddDays(-7).ToString("yyyy-MM-dd") + "' AND  '" + startOfWeek.AddDays(-1).ToString("yyyy-MM-dd") + "' " +
+             "Group by INTEGRANTES.NOMBRES)                                                  " +
+             ", t2 as (                                                                      " +
+             "select INTEGRANTES.NOMBRES, count(*) as Cantidad from REPARACIONES             " +
+             "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
+             "where REPARACIONES.FECHATERMINADO BETWEEN '" + startOfWeek.ToString("yyyy-MM-dd") + "' AND  '" + toDay.ToString("yyyy-MM-dd") + "' " +
+             "Group by INTEGRANTES.NOMBRES)                                                  " +
+             "select* from t1                                                                " +
+             "full outer join t2 on t1.Nombres = t2.nombres                                  ";
+
+
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                ventas.Add(new AdminInfoModelUnion
+                {
+                    Description = row[0] != DBNull.Value ? row[0].ToString() : row[3].ToString(),
+                    Cant = int.Parse(row[1] != DBNull.Value ? row[1].ToString() : "0"),
+                    Description2 = row[2] != DBNull.Value ? row[2].ToString() : row[0].ToString(),
+                    Cant2 = int.Parse(row[3] != DBNull.Value ? row[3].ToString() : "0")
                 });
             }
             return ventas;
@@ -226,13 +286,13 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 equiposIngresados.Add(new AdminInfoModel
                 {
-                    Description = row[0].ToString(),
+                    Description = DateTime.Parse(row[0].ToString()).ToString("yy-MMM-dd ddd"),
                     Cant = int.Parse(row[1].ToString())
                 });
             }
             return equiposIngresados;
 
-            }
+        }
     }
 
 }

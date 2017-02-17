@@ -27,7 +27,9 @@ namespace FixMens.Controllers
                 Ventas = Admin.GetVentasDia(),
                 Egresos = Admin.GetEgresos(),
                 ReparacionesPorTecnico = Admin.GetReparacionesPorTecnico(),
-                EquiposIngresados = Admin.GetEquiposIngresados()
+                EquiposIngresados = Admin.GetEquiposIngresados(),
+                ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal()
+
             };
             return View(model);
         }
