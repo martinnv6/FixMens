@@ -11,14 +11,14 @@ namespace FixMens.BLL
 {
     public class Orden
     {
-        public OrdenModel ConsultarOrden(string nombre, int orden)
+        public OrdenModel ConsultarOrden(string nombre, int orden, string admin)
         {
             
-           var result = getOrden(nombre, orden);
+           var result = getOrden(nombre, orden, admin);
             return result;
         }
 
-        private OrdenModel getOrden(string nombre, int orden)
+        private OrdenModel getOrden(string nombre, int orden, string admin)
         {
             OrdenModel result = new OrdenModel(); //Para validar cuando no se encontro orden
             //Validación nombre mas de 5 caracteres.
@@ -47,7 +47,7 @@ namespace FixMens.BLL
                 "FROM REPARACIONES R JOIN CLIENTES C ON R.CLIENTE = C.CODIGO "+
                 "JOIN PRESUPUESTOS P ON R.CODIGO = P.IDREPARACION "+
                 "JOIN INTEGRANTES I ON R.TECNICO = I.CODIGO "+
-                "WHERE R.CODIGO = @pCodigo AND C.NOMBRES CONTAINING @pNombre";
+                "WHERE R.CODIGO = @pCodigo"+ (admin != "1123581321" ? " AND C.NOMBRES CONTAINING @pNombre": " ");
             cmd.CommandType = CommandType.Text;
 
 

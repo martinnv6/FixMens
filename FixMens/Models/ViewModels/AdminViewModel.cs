@@ -18,5 +18,17 @@ namespace FixMens.Models.ViewModels
 
     }
 
+    public class DetalleEgresos
+    {
+        public DateTime Fecha { get; set; }
+        public DateTime Hora { get; set; }
+        public float Cantidad { get; set; }
+        public string Descripcion { get; set; }
+       
+
+
+
+    }
+
 
 }

@@ -9,6 +9,7 @@ using System.Web;
 using AutoMapper;
 using FirebirdSql.Data.FirebirdClient;
 using FixMens.Models;
+using FixMens.Models.ViewModels;
 
 namespace FixMens.BLL
 {
@@ -100,7 +101,7 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 ventas.Add(new AdminInfoModel
                 {
-                    Description = DateTime.Parse(row[0].ToString()).ToString("yy-MMM-dd ddd"),
+                    Description = row[0].ToString(),
                     Cant = (int)Convert.ToInt64(Convert.ToDouble(row[1].ToString()))
                 });
             }
@@ -144,7 +145,7 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 ventas.Add(new AdminInfoModel
                 {
-                    Description = DateTime.Parse(row[0].ToString()).ToString("yy-MMM-dd ddd"),
+                    Description = row[0].ToString(),
                     Cant = (int)Convert.ToInt64(Convert.ToDouble(row[1].ToString()))
                 });
             }
@@ -244,9 +245,9 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 ventas.Add(new AdminInfoModelUnion
                 {
-                    Description = row[0] != DBNull.Value ? row[0].ToString() : row[3].ToString(),
+                    Description = row[0] != DBNull.Value ? row[0].ToString() : row[2].ToString(),
                     Cant = int.Parse(row[1] != DBNull.Value ? row[1].ToString() : "0"),
-                    Description2 = row[2] != DBNull.Value ? row[2].ToString() : row[0].ToString(),
+
                     Cant2 = int.Parse(row[3] != DBNull.Value ? row[3].ToString() : "0")
                 });
             }
@@ -291,6 +292,101 @@ namespace FixMens.BLL
                 });
             }
             return equiposIngresados;
+
+        }
+
+        public List<DetalleEgresos> GetDetalleEgresos(DateTime fecha)
+        {
+            List<DetalleEgresos> detalle = new List<DetalleEgresos>();
+
+
+
+
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+
+                "select fecha, hora, importe, descripcion from gastos " +
+                "where fecha = '" + fecha.ToString("yyyy-MM-dd") + "' " +
+                "order by fecha desc                                 ";
+
+            cmd.CommandType = CommandType.Text;                 
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                detalle.Add(new DetalleEgresos
+                {
+                    Fecha = DateTime.Parse(row[0].ToString()),
+                    Hora = DateTime.Parse(row[1].ToString()),
+                    Cantidad = float.Parse(row[2].ToString()),
+                    Descripcion = row[3].ToString()
+
+                });
+            }
+            return detalle;
+
+            
+        }
+
+        public List<DetalleEgresos> GetDetalleVentas(DateTime fecha)
+        {
+            List<DetalleEgresos> detalle = new List<DetalleEgresos>();
+
+
+
+
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "select ventas.fecha, ventas.hora, ventas.total, ventas.observaciones, ventasdet.descripcion from ventas "+
+                "join ventasdet                                                                                          "+
+                "on ventas.SERIE = ventasdet.SERIE                                                                       "+
+                "and VENTAS.NUMERO = ventasdet.NUMERO                                                                    "+
+                "where fecha = '" + fecha.ToString("yyyy-MM-dd") + "' " +
+                "order by fecha, hora asc                                                                                    "; 
+               
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                detalle.Add(new DetalleEgresos
+                {
+                    Fecha = DateTime.Parse(row[0].ToString()),
+                    Hora = DateTime.Parse(row[1].ToString()),
+                    Cantidad = float.Parse(row[2].ToString()),
+                    Descripcion = row[3] + " " + row[4]
+
+                });
+            }
+            return detalle;
+
 
         }
     }

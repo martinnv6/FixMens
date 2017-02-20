@@ -5,7 +5,13 @@
         $(".parallax").parallax();
 
     });
-    
+    $("#isAdmin").click(function() {
+        if($(this).is(":checked")) {
+            $(".divPassword").removeClass("hide");
+        } else {
+            $(".divPassword").addClass("hide");
+        }
+    });
    
     // end of document ready
 })($); // end of jQuery name space
@@ -34,7 +40,7 @@ function consultarOrden() {
             type: "GET",
             url: window.consultarOrdenAction,
             datatype: "html",
-            data: { nombre: $("#nombre").val(), orden: $("#orden").val() },
+            data: { nombre: $("#nombre").val(), orden: $("#orden").val(), admin: $("#adminPassword").val() },
             success: function(data) {
                 $("#detalleOrden").html(data);
                 Materialize.updateTextFields();

@@ -15,14 +15,14 @@ namespace Fixmens.Test
         public void ConsultarOrdenClienteExistente()
         {
             Orden orden = new Orden();
-            var result = orden.ConsultarOrden("LUZ", 12344);
+            var result = orden.ConsultarOrden("LUZ", 12344, "");
             Assert.IsTrue(result != default(OrdenModel));
         }
         [TestMethod]
         public void ConsultarOrdenClienteErroneo()
         {
             Orden orden = new Orden();
-            var result = orden.ConsultarOrden("LUZAAAAAAAAAAAA", 12344);
+            var result = orden.ConsultarOrden("LUZAAAAAAAAAAAA", 12344, "");
             Assert.IsTrue(result != default(OrdenModel));
         }
 

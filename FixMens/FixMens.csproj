@@ -307,6 +307,7 @@
     <Content Include="Views\Home\ConsultarOrden.cshtml" />
     <Content Include="Views\Home\DetalleOrden.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\fixmensMVC_FTP.pubxml" />
     <None Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -343,6 +344,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Admin\detalleEgresos.cshtml" />
+    <Content Include="Views\Admin\DetalleVentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

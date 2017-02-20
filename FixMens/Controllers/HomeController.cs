@@ -37,10 +37,10 @@ namespace FixMens.Controllers
         }
 
         [HttpGet]
-        public ActionResult DetalleOrden(string nombre, int orden)
+        public ActionResult DetalleOrden(string nombre, int orden, string admin = "")
         {
             Orden bllOrden = new Orden();
-            var model = bllOrden.ConsultarOrden(nombre, orden);
+            var model = bllOrden.ConsultarOrden(nombre, orden, admin);
             if (model.NombreCliente == null)
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;

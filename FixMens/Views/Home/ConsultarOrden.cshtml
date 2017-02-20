@@ -17,6 +17,15 @@
                 <input maxlength="10" pattern=".{5,10}" placeholder="Cualquier parte de tu nombre o apellido (Min 5 caracteres)" id="nombre" type="text" class="validate required" required="" aria-required="true">
                 <label for="first_name">Nombre</label>
             </div>
+            <p>
+                <input type="checkbox" id="isAdmin" />
+                <label for="isAdmin">Soy Administrador</label>
+            </p>
+            
+            <div class="hide input-field col s6 divPassword" >
+                <input  id="adminPassword" type="password">
+                <label for="password">Password</label>
+            </div>
 
         </div>
         <div class="row">
@@ -32,5 +41,6 @@
 </div>
 <script>
     window.consultarOrdenAction = "@Url.Action("DetalleOrden")";
+    
 </script>
 @Scripts.Render("~/bundles/ConsultarOrden")

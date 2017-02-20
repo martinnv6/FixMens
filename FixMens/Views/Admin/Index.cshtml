@@ -164,7 +164,8 @@
             {
                 <tr>
                     <th>
-                        @item.Description
+                        @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleVentas", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleVentas" }) 
+                        
                     </th>
                     <th>
                         $@item.Cant.00
@@ -194,7 +195,7 @@
             {
                 <tr>
                     <th>
-                        @item.Description
+                       @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "detalleEgresos",new {fecha= DateTime.Parse(@item.Description)}, new { @class = "lnkDetalleEgresos" }) 
                     </th>
                     <th>
                         $@item.Cant.00
@@ -208,6 +209,8 @@
     </div>
 </div>
 
+
+
 <script>
     (function ($) {
         $(function () {
@@ -218,8 +221,14 @@
                     $("#password").addClass("hide");
                     $("#btnVentas").addClass("hide");
                 }
-                
-                });
+
+            });
+            $(".lnkDetalleEgresos")
+                .click(function() {
+                    $('#modal1').modal('open');
+
+                    }
+                );
 
         });
 

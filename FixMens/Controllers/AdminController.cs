@@ -33,5 +33,18 @@ namespace FixMens.Controllers
             };
             return View(model);
         }
+
+        public ActionResult detalleEgresos(DateTime fecha)
+        {
+            List<DetalleEgresos> model = Admin.GetDetalleEgresos(fecha);
+
+            return View(model);
+        }
+
+        public ActionResult DetalleVentas(DateTime fecha)
+        {
+            List<DetalleEgresos> model = Admin.GetDetalleVentas(fecha);
+            return View(model);
+        }
     }
 }
