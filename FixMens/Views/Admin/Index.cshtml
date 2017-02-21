@@ -55,7 +55,8 @@
             {
                 <tr>
                     <th>
-                        @item.Description
+                        @Html.ActionLink(@item.Description, "DetalleReparaciones", new { nombre = @item.Description }, new { @class = "lnkDetalleReparaciones" }) 
+                        
                     </th>
                     <th>
                         @item.Cant
@@ -69,8 +70,39 @@
     </div>
 </div>
 <div class="row">
-    <div class="col s6">
+    <div class="col s3">
         <h5>Equipos Ingresados a taller</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.EquiposIngresados
+                )
+            {
+                <tr>
+                    <th>
+                       @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleEquipos", new { fecha = DateTime.Parse(@item.Description), tipoConsulta = "Ingresados" }, new { @class = "lnkDetalleIngresados" }) 
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                </tr>
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col s3">
+        <h5>Equipos Entregados en taller</h5>
         <table class="striped">
             <thead>
                 <tr>
@@ -83,12 +115,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.EquiposIngresados
-                    )
-            {
+                @foreach (var item in Model.EquiposEntregados
+                )
+                {
                     <tr>
                         <th>
-                            @item.Description
+                            @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleEquipos", new { fecha = DateTime.Parse(@item.Description), tipoConsulta = "Entregados" }, new { @class = "lnkDetalleEntregados" }) 
                         </th>
                         <th>
                             @item.Cant

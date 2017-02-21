@@ -43,7 +43,7 @@ namespace FixMens.BLL
             //FbParameter pMatricula = new FbParameter();
             cmd.Parameters.Add("pCodigo", cod);
             cmd.Parameters.Add("pNombre", nombre);
-            cmd.CommandText = "SELECT R.CODIGO, C.NOMBRES,R.FALLA,R.INFORMETALLER,P.DETALLE, P.PRESUPUESTO, I.NOMBRES AS TECNICO "+
+            cmd.CommandText = "SELECT R.CODIGO, C.NOMBRES || ' ' || C.telefono || ' ' || C.celular as NOMBRES,R.FALLA,R.INFORMETALLER,P.DETALLE, P.PRESUPUESTO, I.NOMBRES AS TECNICO " +
                 "FROM REPARACIONES R JOIN CLIENTES C ON R.CLIENTE = C.CODIGO "+
                 "JOIN PRESUPUESTOS P ON R.CODIGO = P.IDREPARACION "+
                 "JOIN INTEGRANTES I ON R.TECNICO = I.CODIGO "+

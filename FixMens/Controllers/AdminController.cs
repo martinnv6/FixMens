@@ -28,7 +28,9 @@ namespace FixMens.Controllers
                 Egresos = Admin.GetEgresos(),
                 ReparacionesPorTecnico = Admin.GetReparacionesPorTecnico(),
                 EquiposIngresados = Admin.GetEquiposIngresados(),
+                EquiposEntregados = Admin.GetEquiposEntregados(),
                 ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal()
+
 
             };
             return View(model);
@@ -46,5 +48,26 @@ namespace FixMens.Controllers
             List<DetalleEgresos> model = Admin.GetDetalleVentas(fecha);
             return View(model);
         }
+
+        public ActionResult DetalleReparaciones(string nombre)
+        {
+            List<ReparacionesModel> model = Admin.GetReparacionesPorTecnico_Detalle(nombre);
+            return View(model);
+        }
+        //ToDo: reutilizar metodo de consulta y tambien la vista de los equipos
+        public ActionResult DetalleEquipos(DateTime fecha, string tipoConsulta)
+        {
+            List<ReparacionesModel> model = Admin.GetEntregados_Detalle(fecha, tipoConsulta);
+            ViewBag.tipoConsulta = tipoConsulta + " " + fecha.ToShortDateString();
+            return View(model);
+        }
+
+        
+
+
+        //public ActionResult OrdenesDeReparacionPorTecnico(DateTime fechaInicio, DateTime fechaFin,int tecnico)
+        //{
+        //    return null;
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity.Core.Mapping;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
@@ -197,6 +198,73 @@ namespace FixMens.BLL
             return ventas;
         }
 
+        public List<ReparacionesModel> GetReparacionesPorTecnico_Detalle(string nombre)
+        {
+            var toDay = DateTime.Now;
+
+            var reparaciones = new List<ReparacionesModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "select REPARACIONES.codigo,                                                    " +
+                "aparato.MARCA,                                                                 " +
+                "aparato.MODELO,                                                                " +
+                "REPARACIONES.falla,                                                            " +
+                "REPARACIONES.informetaller,                                                    " +
+                "presupuestos.DETALLE,                                                          " +
+                "REPARACIONES.horaterminado,                                                    " +
+                "REPARACIONES.entregado,                                                        " +
+                "presupuestos.FACTURADO,                                                        " +
+                "reparaciones.FECHA_ENTREGADO,                                                  " +
+                "presupuestos.TOTAL                                                             " +
+                "from REPARACIONES                                                              " +
+                "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
+                "inner join aparato on aparato.ns = reparaciones.ns                             " +
+                "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo     " +
+                "where integrantes.NOMBRES = '"+nombre+"'                                         " +
+                "and reparaciones.FECHATERMINADO = '" + toDay.ToString("yyyy-MM-dd") + "'       ";
+
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                reparaciones.Add(new ReparacionesModel
+                {
+                    HoraTerminado = row[6].ToString(),
+                    Codigo = int.Parse(row[0].ToString()),
+                    Marca = row[1].ToString(),
+                    Modelo = row[2].ToString(),
+                    Falla = row[3].ToString(),
+                    InformeTeller = row[4].ToString(),
+                    DetallePresupuesto = row[5].ToString(),
+                    Entregado = Convert.ToChar(row[7]),
+                    Facturado = Convert.ToChar(row[8]),
+                    FechaEntrega = row[9].ToString() != "" ? DateTime.Parse(row[9].ToString()).ToShortDateString() : "",
+                    Total = Convert.ToSingle(row[10])
+
+                });
+            }
+            return reparaciones;
+        }
+
         public List<AdminInfoModelUnion> GetReparacionesPorTecnicoSemanal()
         {
 
@@ -287,7 +355,47 @@ namespace FixMens.BLL
                 if (row[0].ToString() == "0") continue;
                 equiposIngresados.Add(new AdminInfoModel
                 {
-                    Description = DateTime.Parse(row[0].ToString()).ToString("yy-MMM-dd ddd"),
+                    Description = row[0].ToString(),
+                    Cant = int.Parse(row[1].ToString())
+                });
+            }
+            return equiposIngresados;
+
+        }
+        public List<AdminInfoModel> GetEquiposEntregados()
+        {
+            var equiposIngresados = new List<AdminInfoModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "SELECT FIRST 7 FECHA_ENTREGADO AS FECHA, COUNT(*) AS CANTIDAD FROM REPARACIONES " +
+                "WHERE FECHA_ENTREGADO IS NOT NULL                                              " +
+                "GROUP BY FECHA_ENTREGADO                                                       " +
+                "ORDER BY FECHA_ENTREGADO DESC                                                  ";
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                equiposIngresados.Add(new AdminInfoModel
+                {
+                    Description = row[0].ToString(),
                     Cant = int.Parse(row[1].ToString())
                 });
             }
@@ -387,6 +495,85 @@ namespace FixMens.BLL
             }
             return detalle;
 
+
+        }
+
+
+        public List<ReparacionesModel> GetEntregados_Detalle(DateTime fecha,string tipoConsulta)
+        {
+            
+
+            var reparaciones = new List<ReparacionesModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+            string condition = "";
+            switch (tipoConsulta)
+            {
+                case "Entregados":
+                    condition = "and reparaciones.fecha_entregado = '" + fecha.ToString("yyyy-MM-dd") + "'       ";
+                    break;
+                case "Ingresados":
+                    condition = "and reparaciones.fechaIngreso = '" + fecha.ToString("yyyy-MM-dd") + "'       ";
+                    break;
+
+
+            }
+
+
+            cmd.CommandText =
+                "select REPARACIONES.codigo,                                                    " +
+                "aparato.MARCA,                                                                 " +
+                "aparato.MODELO,                                                                " +
+                "REPARACIONES.falla,                                                            " +
+                "REPARACIONES.informetaller,                                                    " +
+                "presupuestos.DETALLE,                                                          " +
+                "REPARACIONES.horaterminado,                                                    " +
+                "REPARACIONES.entregado,                                                        " +
+                "presupuestos.FACTURADO,                                                        " +
+                "reparaciones.FECHA_ENTREGADO,                                                  " +
+                "presupuestos.TOTAL                                                             " +
+                "from REPARACIONES                                                              " +
+                "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
+                "inner join aparato on aparato.ns = reparaciones.ns                             " +
+                "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo     " + condition;
+
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                reparaciones.Add(new ReparacionesModel
+                {
+                    HoraTerminado = row[6].ToString(),
+                    Codigo = int.Parse(row[0].ToString()),
+                    Marca = row[1].ToString(),
+                    Modelo = row[2].ToString(),
+                    Falla = row[3].ToString(),
+                    InformeTeller = row[4].ToString(),
+                    DetallePresupuesto = row[5].ToString(),
+                    Entregado = Convert.ToChar(row[7]),
+                    Facturado = Convert.ToChar(row[8]),
+                    FechaEntrega = row[9].ToString() != "" ? DateTime.Parse(row[9].ToString()).ToShortDateString() : "",
+                    Total = row[10].ToString() != "" ? Convert.ToSingle(row[10]) : 0
+
+                });
+            }
+            return reparaciones;
 
         }
     }

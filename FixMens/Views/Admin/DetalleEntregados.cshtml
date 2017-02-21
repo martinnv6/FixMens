@@ -1,0 +1,101 @@
+﻿@model List<FixMens.Models.ViewModels.ReparacionesModel>
+<!-- Modal Structure -->
+
+
+
+<div class="col s12">
+    <h4>Detalle Equipos entregados</h4>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>
+                    Hora de Terminado
+                </th>
+                <th>
+                    # Orden
+                </th>
+                <th>
+                    Marca
+                </th>
+                <th>
+                    Modelo
+                </th>
+                <th>
+                    Falla
+                </th>
+                <th>
+                    Informe de taller
+                </th>
+                <th>
+                    Detalle de presupuesto
+                </th>
+                <th>
+                    Entregado
+                </th>
+                <th>
+                    Facturado
+                </th>
+                <th>
+                    Fecha de Entrega
+                </th>
+                <th>
+                    Total
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.HoraTerminado
+                    </th>
+                    <th>
+                        @item.Codigo
+                    </th>
+                    <th>
+                        @item.Marca
+                    </th>
+                    <th>
+                        @item.Modelo
+                    </th>
+                    <th>
+                        @item.Falla
+                    </th>
+                    <th>
+                        @item.InformeTeller
+                    </th>
+                    <th>
+                        @item.DetallePresupuesto
+                    </th>
+
+                    <th>
+                        @item.Entregado
+                    </th>
+                    <th>
+                        @item.Facturado
+                    </th>
+                    <th>
+                        @item.FechaEntrega
+                    </th>
+                    <th>
+                        $@item.Total
+                    </th>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+

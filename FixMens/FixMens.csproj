@@ -346,6 +346,9 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Admin\detalleEgresos.cshtml" />
     <Content Include="Views\Admin\DetalleVentas.cshtml" />
+    <Content Include="Views\Admin\DetalleReparaciones.cshtml" />
+    <Content Include="Views\Admin\DetalleEntregados.cshtml" />
+    <Content Include="Views\Admin\DetalleEquipos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

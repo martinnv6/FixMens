@@ -1,0 +1,53 @@
+﻿@model List<FixMens.Models.ViewModels.DetalleEgresos>
+<!-- Modal Structure -->
+
+    
+
+        <div class="col s12">
+            <h4>Detalle Egresos</h4>
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Hora
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th>
+                        Descripción
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>
+                            @item.Fecha.ToShortDateString()
+                        </th>
+                        <th>
+                            @item.Hora.ToShortTimeString()
+                        </th>
+                        <th>
+                            $@item.Cantidad
+                        </th>
+                        <th>
+                            @item.Descripcion
+                        </th>
+                    </tr>
+
+                }
+
+                </tbody>
+            </table>
+        </div>
+
+        
+    
+
+
+

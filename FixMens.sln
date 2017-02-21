@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens", "FixMens\FixMens.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixmens.Test", "Fixmens.Test\Fixmens.Test.csproj", "{FD7CB8C6-53BE-4476-901F-543B206EC3E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens.Rest", "FixMens.Rest\FixMens.Rest.csproj", "{720CCC76-AC1C-4130-8722-C9BD8FE0494F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
