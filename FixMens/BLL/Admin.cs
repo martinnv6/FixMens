@@ -227,7 +227,7 @@ namespace FixMens.BLL
                 "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
                 "inner join aparato on aparato.ns = reparaciones.ns                             " +
                 "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo     " +
-                "where integrantes.NOMBRES = '"+nombre+"'                                         " +
+                "where integrantes.NOMBRES = '" + nombre + "'                                         " +
                 "and reparaciones.FECHATERMINADO = '" + toDay.ToString("yyyy-MM-dd") + "'       ";
 
 
@@ -424,7 +424,7 @@ namespace FixMens.BLL
                 "where fecha = '" + fecha.ToString("yyyy-MM-dd") + "' " +
                 "order by fecha desc                                 ";
 
-            cmd.CommandType = CommandType.Text;                 
+            cmd.CommandType = CommandType.Text;
 
 
             conn.Open();
@@ -446,7 +446,7 @@ namespace FixMens.BLL
             }
             return detalle;
 
-            
+
         }
 
         public List<DetalleEgresos> GetDetalleVentas(DateTime fecha)
@@ -465,13 +465,13 @@ namespace FixMens.BLL
 
 
             cmd.CommandText =
-                "select ventas.fecha, ventas.hora, ventas.total, ventas.observaciones, ventasdet.descripcion from ventas "+
-                "join ventasdet                                                                                          "+
-                "on ventas.SERIE = ventasdet.SERIE                                                                       "+
-                "and VENTAS.NUMERO = ventasdet.NUMERO                                                                    "+
+                "select ventas.fecha, ventas.hora, ventas.total, ventas.observaciones, ventasdet.descripcion from ventas " +
+                "join ventasdet                                                                                          " +
+                "on ventas.SERIE = ventasdet.SERIE                                                                       " +
+                "and VENTAS.NUMERO = ventasdet.NUMERO                                                                    " +
                 "where fecha = '" + fecha.ToString("yyyy-MM-dd") + "' " +
-                "order by fecha, hora asc                                                                                    "; 
-               
+                "order by fecha, hora asc                                                                                    ";
+
 
             cmd.CommandType = CommandType.Text;
 
@@ -499,9 +499,9 @@ namespace FixMens.BLL
         }
 
 
-        public List<ReparacionesModel> GetEntregados_Detalle(DateTime fecha,string tipoConsulta)
+        public List<ReparacionesModel> GetEntregados_Detalle(DateTime fecha, string tipoConsulta)
         {
-            
+
 
             var reparaciones = new List<ReparacionesModel>();
             FbConnection conn = new FbConnection();
@@ -518,6 +518,11 @@ namespace FixMens.BLL
                     break;
                 case "Ingresados":
                     condition = "and reparaciones.fechaIngreso = '" + fecha.ToString("yyyy-MM-dd") + "'       ";
+                    break;
+                case "Entregados no facturados":
+                    condition = "and reparaciones.ENTREGADO = 'S'                                            " +
+                    "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
+                    "and presupuestos.TOTAL > 0 order by reparaciones.FECHA_ENTREGADO desc ";
                     break;
 
 
@@ -574,6 +579,26 @@ namespace FixMens.BLL
                 });
             }
             return reparaciones;
+
+        }
+
+        public float GetEquiposEntregadosNoFacturados()
+        {
+            FbConnection conn = new FbConnection();
+            FbCommand cmd = new FbCommand();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+            cmd.CommandText = " SELECT SUM(Presupuestos.TOTAL)from REPARACIONES " +
+                    "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo    " +
+                    "where reparaciones.ENTREGADO = 'S'                                            " +
+                    "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
+                    "and presupuestos.TOTAL > 0                                                  ";
+            cmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
+            float id = float.Parse(cmd.ExecuteScalar().ToString());
+            conn.Close();
+            return id;
 
         }
     }

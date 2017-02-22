@@ -29,10 +29,9 @@ namespace FixMens.Controllers
                 ReparacionesPorTecnico = Admin.GetReparacionesPorTecnico(),
                 EquiposIngresados = Admin.GetEquiposIngresados(),
                 EquiposEntregados = Admin.GetEquiposEntregados(),
-                ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal()
-
-
-            };
+                ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal(),
+                TotalMoneyEntregadosNoFacturados = Admin.GetEquiposEntregadosNoFacturados()
+                };
             return View(model);
         }
 

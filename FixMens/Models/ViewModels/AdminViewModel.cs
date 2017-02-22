@@ -15,6 +15,7 @@ namespace FixMens.Models.ViewModels
         public List<AdminInfoModel> EquiposEntregados { get; set; }
         
         public List<AdminInfoModelUnion> ReparacionesPorTecnicoSemana { get; set; }
+        public float TotalMoneyEntregadosNoFacturados { get; set; }
 
 
 
