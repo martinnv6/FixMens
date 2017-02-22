@@ -1,0 +1,105 @@
+﻿@model FixMens.Models.ViewModels.CajaViewModel
+
+<div class="col s12">
+    
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Inicio de caja
+                </th>
+                <th>
+                    Declarado al cerrar
+                </th>
+                <th>
+                    Calculado
+                </th>
+                <th>
+                    Diferencia
+                </th>
+
+                @if (Model.tipoConsulta == "Conciliacion")
+                {
+                    <th>
+                        No Facturado
+                    </th>
+                    <th>
+                        Conciliación
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.tipoConsulta == "Conciliacion")
+            {
+                foreach (var item in Model.ConciliacionList)
+                {
+                    <tr >
+                        <th>
+                            @item.Fecha.ToShortDateString()
+                        </th>
+                        <th>
+                            @item.InicioCaja
+                        </th>
+                        <th>
+                            @item.Declarado
+                        <th>
+                            @item.Calculado
+                        </th>
+                        <th>
+                            @item.Diferencia
+                        </th>
+
+                        <th>
+
+                            @Html.ActionLink($"{item.NoFacturados:C}", "DetalleEquipos", new { fecha = @item.Fecha, tipoConsulta = "NoFacturados" }, new { @class = "lnkDetalleEquiposNoFacturados" })
+                        </th>
+                        <th>
+                            @item.Conciliacion 
+                            @if (item.Conciliacion > 0)
+                            {
+
+                                <i class="material-icons" style="color:red">warning</i>
+
+                            }
+                            else
+                            {
+                                <i class="material-icons">done</i>
+                            }
+
+                        </th>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                foreach (var item in Model.ArqueoList)
+                {
+                    <tr>
+                        <th>
+                            @item.Fecha.ToShortDateString()
+                        </th>
+                        <th>
+                            @item.InicioCaja
+                        </th>
+                        <th>
+                            @item.Declarado
+                        <th>
+                            @item.Calculado
+                        </th>
+                        <th>
+                            @item.Diferencia
+                        </th>
+
+                    </tr>
+
+                }
+            }
+        </tbody>
+    </table>
+</div>
+}

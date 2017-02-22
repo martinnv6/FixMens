@@ -1,0 +1,7 @@
+﻿@model string
+<div class="collection">
+     @Html.ActionLink("Mes Actual", "Arqueo",null, new { @class = "collection-item" })
+    @Html.ActionLink("Mes Anterior", "ArqueoMesAnterior",null, new { @class = "collection-item" })
+    @Html.ActionLink("Conciliar", "Conciliar",null, new { @class = "collection-item" })
+    </div>
+    <h4>Arqueos de caja de @Model</h4>

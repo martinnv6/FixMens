@@ -49,5 +49,33 @@ namespace FixMens.Models.ViewModels
 
     }
 
+    public class ArqueoViewModel
+    {
+        public DateTime Fecha { get; set; }
+        public decimal InicioCaja { get; set; }
+        public decimal Declarado { get; set; }
+        public decimal Calculado { get; set; }
+        public decimal Diferencia { get; set; }
+    }
+
+    public class ConciliacionViewModel
+    {
+        public DateTime Fecha { get; set; }
+        public decimal InicioCaja { get; set; }
+        public decimal Declarado { get; set; }
+        public decimal Calculado { get; set; }
+        public decimal Diferencia { get; set; }
+        public decimal NoFacturados { get; set; }
+        public decimal Conciliacion { get; set; }
+    }
+
+    public class CajaViewModel
+    {
+        public string tipoConsulta { get; set; }
+        public List<ArqueoViewModel> ArqueoList { get; set; }
+        public List<ConciliacionViewModel> ConciliacionList { get; set; }
+        
+    }
+
 
 }

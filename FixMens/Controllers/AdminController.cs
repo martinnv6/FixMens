@@ -68,5 +68,40 @@ namespace FixMens.Controllers
         //{
         //    return null;
         //}
+        public ActionResult Arqueo()
+        {
+            var startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var endDate = DateTime.Now;
+
+            CajaViewModel model = new CajaViewModel {tipoConsulta = "MesActual"};
+            model.ArqueoList = Admin.GetArqueo(startDate, endDate, model.tipoConsulta);
+            
+            
+
+            
+            return View(model);
+        }
+
+        public ActionResult ArqueoMesAnterior()
+        {
+            var endDate = DateTime.Now.AddMonths(-1);
+            var startDate = new DateTime(endDate.Year, endDate.Month, 1);
+            
+
+            CajaViewModel model = new CajaViewModel { tipoConsulta = "MesAnterior" };
+            model.ArqueoList = Admin.GetArqueo(startDate, endDate, model.tipoConsulta);
+            return View(model);
+        }
+
+        public ActionResult Conciliar()
+        {
+
+            CajaViewModel model = new CajaViewModel
+            {
+                tipoConsulta = "Conciliacion",
+                ConciliacionList = Admin.GetConciliacion()
+            };
+            return View(model);
+        }
     }
 }

@@ -524,6 +524,13 @@ namespace FixMens.BLL
                     "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
                     "and presupuestos.TOTAL > 0 order by reparaciones.FECHA_ENTREGADO desc ";
                     break;
+                case "NoFacturados"://By Date
+                    condition = "and reparaciones.ENTREGADO = 'S'                                            " +
+                    "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
+                    "and presupuestos.TOTAL > 0" +
+                    "and Reparaciones.FECHA_ENTREGADO = '"+ fecha.ToString("yyyy-MM-dd") + "' "+
+                    " order by reparaciones.FECHA_ENTREGADO desc ";
+                    break;
 
 
             }
@@ -531,6 +538,7 @@ namespace FixMens.BLL
 
             cmd.CommandText =
                 "select REPARACIONES.codigo,                                                    " +
+               //ToDo: Verificar si se debe agregar nombre o no por privacidad //"select clientes.nombre,                                                    " +
                 "aparato.MARCA,                                                                 " +
                 "aparato.MODELO,                                                                " +
                 "REPARACIONES.falla,                                                            " +
@@ -542,6 +550,7 @@ namespace FixMens.BLL
                 "reparaciones.FECHA_ENTREGADO,                                                  " +
                 "presupuestos.TOTAL                                                             " +
                 "from REPARACIONES                                                              " +
+                "inner join clientes on clientes.CODIGO = reparaciones.CLIENTE "+
                 "inner join INTEGRANTES on INTEGRANTES.CODIGO = reparaciones.TECNICO            " +
                 "inner join aparato on aparato.ns = reparaciones.ns                             " +
                 "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo     " + condition;
@@ -600,6 +609,127 @@ namespace FixMens.BLL
             conn.Close();
             return id;
 
+        }
+
+        public List<ArqueoViewModel> GetArqueo(DateTime startDate, DateTime endDate, string tipoConsulta)
+        {
+            var reparaciones = new List<ArqueoViewModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+            string condition = "";
+            switch (tipoConsulta)
+            {
+                case "MesActual":
+                case "MesAnterior":
+                    condition = "and ARQUEO.FECHA BETWEEN '" + startDate.ToString("yyyy-MM-dd") + "' AND '" + endDate.ToString("yyyy-MM-dd") + "' " +
+                                "AND ARQUEO.CERRADA = 'S' ";
+                    break;
+
+
+
+            }
+
+
+            cmd.CommandText =
+                "SELECT ARQUEO.FECHA, ARQUEO.IMPORTEINICIAL,ARQUEO.TOTAL, ARQUEO.CALCULADO, ARQUEO.DIFERENCIA FROM ARQUEO " +
+                "WHERE ARQUEO.CAJA = 1                                                                                   " +
+                condition +
+                "ORDER BY ARQUEO.FECHA DESC ";
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                reparaciones.Add(new ArqueoViewModel
+                {
+                    Fecha = Convert.ToDateTime(row[0].ToString()),
+                    InicioCaja = Convert.ToDecimal(row[1].ToString()),
+                    Declarado = Convert.ToDecimal(row[2].ToString()),
+                    Calculado = Convert.ToDecimal(row[3].ToString()),
+                    Diferencia = Convert.ToDecimal(row[4].ToString())
+
+
+
+
+                });
+            }
+            return reparaciones;
+        }
+
+        public List<ConciliacionViewModel> GetConciliacion()
+        {
+            var reparaciones = new List<ConciliacionViewModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+            string condition = "";
+
+
+
+            cmd.CommandText =
+                "with t1 as(" +
+                    "select reparaciones.FECHA_ENTREGADO, sum(PRESUPUESTOS.TOTAL) as Total from reparaciones " +
+                    "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.CODIGO             " +
+                    "where reparaciones.ENTREGADO = 'S'                                                     " +
+                    "and presupuestos.FACTURADO = 'N'                                                       " +
+                    "and Total > 0                                                                          " +
+                    "group by reparaciones.FECHA_ENTREGADO                                                  " +
+                    ")                                                                                      " +
+                    "SELECT FIRST 100 ARQUEO.FECHA, ARQUEO.IMPORTEINICIAL,                                            " +
+                    "ARQUEO.TOTAL, ARQUEO.CALCULADO, ARQUEO.DIFERENCIA,                                     " +
+                    "t1.TOTAL NoFacturados                                                                  " +
+                    "FROM ARQUEO                                                                            " +
+                    "inner join t1 on t1.fecha_entregado = arqueo.FECHA                                     " +
+                    "WHERE ARQUEO.CAJA = 1                                                                  " +
+                    "AND ARQUEO.CERRADA = 'S'                                                               " +
+                    "ORDER BY ARQUEO.FECHA DESC";
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                reparaciones.Add(new ConciliacionViewModel
+                {
+                    Fecha = Convert.ToDateTime(row[0].ToString()),
+                    InicioCaja = Convert.ToDecimal(row[1].ToString()),
+                    Declarado = Convert.ToDecimal(row[2].ToString()),
+                    Calculado = Convert.ToDecimal(row[3].ToString()),
+                    Diferencia = Convert.ToDecimal(row[4].ToString()),
+                    NoFacturados = Convert.ToDecimal(row[5].ToString()),
+                    Conciliacion = Convert.ToDecimal(row[5].ToString()) - Convert.ToDecimal(row[4].ToString()),
+                });
+
+            }
+            return reparaciones;
         }
     }
 
