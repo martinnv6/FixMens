@@ -61,7 +61,12 @@ namespace FixMens.Controllers
             return View(model);
         }
 
-        
+        public ActionResult GetAnticiposEgresos(DateTime? fecha, bool soloAnticipos = true)
+        {
+
+            List<DetalleEgresos> model = Admin.GetAnticiposEgresos(fecha, soloAnticipos);
+            return View(model);
+        }
 
 
         //public ActionResult OrdenesDeReparacionPorTecnico(DateTime fechaInicio, DateTime fechaFin,int tecnico)

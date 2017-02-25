@@ -731,6 +731,61 @@ namespace FixMens.BLL
             }
             return reparaciones;
         }
+
+        public List<DetalleEgresos> GetAnticiposEgresos(DateTime? fecha, bool soloAnticipos)
+        {
+            string condition = "";
+            if (!fecha.HasValue) { fecha = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1); }
+            List<DetalleEgresos> detalle = new List<DetalleEgresos>();
+
+
+
+
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+            if (soloAnticipos)
+            {
+                condition = "And(                                                " +
+                            "gastos.DESCRIPCION like '%ANTICIPO%'                " +
+                            "or GASTOS.DESCRIPCION LIKE '%anticipo%'             " +
+                            "or gastos.Descripcion like '%Anticipo%')            ";
+            }
+
+            cmd.CommandText =
+
+                "select fecha, hora, importe, descripcion from gastos " +
+                "where fecha > '01-01-2017'                          " +
+                condition +
+                "order by fecha desc                                 " ;
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                detalle.Add(new DetalleEgresos
+                {
+                    Fecha = DateTime.Parse(row[0].ToString()),
+                    Hora = DateTime.Parse(row[1].ToString()),
+                    Cantidad = float.Parse(row[2].ToString()),
+                    Descripcion = row[3].ToString()
+
+                });
+            }
+            return detalle;
+            
+        }
     }
 
 }

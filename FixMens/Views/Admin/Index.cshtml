@@ -10,7 +10,7 @@
     <a href="@Url.Action("DetalleEquipos", "Admin", new { fecha = DateTime.Now, tipoConsulta ="Entregados no facturados"  })" class="waves-effect red btn jsEntregadosNoFacturados"><i class="material-icons">report_problem</i> @($"{Model.TotalMoneyEntregadosNoFacturados:C}")</a>
         }
 <a href="@Url.Action("Arqueo", "Admin")" class="waves-effect wave-ligth btn jsArqueos">Arqueos y conciliaciones</a>
-
+<a href="@Url.Action("GetAnticiposEgresos", "Admin", new {fecha = ""})" class="waves-effect wave-ligth btn jsArqueos">Anticipos</a>
         <div class="row">
             <div class="col s6">
                 <h5>Equipos en taller</h5>
