@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +35,20 @@ namespace FixMens.Controllers
         public ActionResult ConsultarOrden()
         {
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult facturar(FacturaModel model)
+        {
+            try
+            {
+                Admin.sendEmailToCreateInvoice(model);
+                return Json("La factura llegara a su correo en maximo 24hrs", JsonRequestBehavior.AllowGet);
+            }
+            catch (System.Exception e)
+            {
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]

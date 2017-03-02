@@ -74,114 +74,124 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col s3">
-                <h5>Equipos Ingresados a taller</h5>
-                <table class="striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Fecha
-                            </th>
-                            <th>
-                                Cantidad
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.EquiposIngresados
-        )
-                        {
-                            <tr>
-                                <th>
-                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleEquipos", new { fecha = DateTime.Parse(@item.Description), tipoConsulta = "Ingresados" }, new { @class = "lnkDetalleIngresados" })
-                                </th>
-                                <th>
-                                    @item.Cant
-                                </th>
-                            </tr>
+<div class="row">
+    <div class="col s3">
+        <h5>Equipos Ingresados a taller</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.EquiposIngresados
+                )
+            {
+                <tr>
+                    <th>
+                        @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "DetalleEquipos", new {fecha = DateTime.Parse(@item.Description), tipoConsulta = "Ingresados"}, new {@class = "lnkDetalleIngresados"})
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                </tr>
 
-                        }
+            }
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="col s3">
-                <h5>Equipos Entregados en taller</h5>
-                <table class="striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Fecha
-                            </th>
-                            <th>
-                                Cantidad
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.EquiposEntregados
-        )
-                        {
-                            <tr>
-                                <th>
-                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleEquipos", new { fecha = DateTime.Parse(@item.Description), tipoConsulta = "Entregados" }, new { @class = "lnkDetalleEntregados" })
-                                </th>
-                                <th>
-                                    @item.Cant
-                                </th>
-                            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col s3">
+        <h5>Equipos Entregados en taller</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.EquiposEntregados
+                )
+            {
+                <tr>
+                    <th>
+                        @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "DetalleEquipos", new {fecha = DateTime.Parse(@item.Description), tipoConsulta = "Entregados"}, new {@class = "lnkDetalleEntregados"})
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
+                </tr>
 
-                        }
+            }
 
-                    </tbody>
-                </table>
-            </div>
-            <div class="col s6">
-                <h5>Reparaciones por técnico - Ultimas dos semanas</h5>
-                <table class="striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Técnico
-                            </th>
-                            <th>
-                                Anterior
-                            </th>
-                            @*<th>
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        <h5>Reparaciones por técnico - Ultimas dos semanas</h5>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>
+                    Técnico
+                </th>
+                <th>
+                    Anterior
+                </th>
+                @*<th>
                                     Técnico
                                 </th>*@
-                            <th>
-                                Actual
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ReparacionesPorTecnicoSemana)
-                        {
-                            <tr>
-                                <th>
-                                    @item.Description
-                                </th>
-                                <th>
-                                    @item.Cant
-                                </th>
+                <th>
+                    Actual
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.ReparacionesPorTecnicoSemana)
+            {
+                <tr>
+                    <th>
+                        @item.Description
+                    </th>
+                    <th>
+                        @item.Cant
+                    </th>
 
-                                @*<th>
+                    @*<th>
                                         @item.Description2
                                     </th>*@
-                                <th>
-                                    @item.Cant2
-                                </th>
-                            </tr>
+                    <th>
+                        @item.Cant2
+                    </th>
+                </tr>
 
-                        }
+            }
 
-                    </tbody>
-                </table>
-            </div>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s3">
+        <input id="password" type="password" class="validate">
+        <label for="password">Password</label>
+    </div>
+    <div class="input-field col s6">
+        <input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas"/>
         </div>
-        <input type="password" id="password" /><input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas" />
+    </div>
+@*<input type="password" id="password" />*@@*<input type="button" id="btnVentas" class="waves-effect waves-light btn" value="Mostrar ventas" />*@
         <div class="row hide" id="ventas">
             <div class="col s6">
                 <h5>Ventas</h5>
@@ -201,7 +211,7 @@
                         {
                             <tr>
                                 <th>
-                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "DetalleVentas", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleVentas" })
+                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "DetalleVentas", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleVentas" })
 
                                 </th>
                                 <th>
@@ -232,7 +242,7 @@
                         {
                             <tr>
                                 <th>
-                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("yy-MMM-dd ddd"), "detalleEgresos", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleEgresos" })
+                                    @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "detalleEgresos", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleEgresos" })
                                 </th>
                                 <th>
                                     $@item.Cant.00
@@ -245,6 +255,71 @@
                 </table>
             </div>
         </div>
+<div class="row hide" id="compras">
+    <div class="col s6">
+        <h5>Compras</h5>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Compras)
+                {
+                    <tr>
+                        <th>
+                            @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "DetalleCompras", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleCompras" })
+
+                        </th>
+                        <th>
+                            $@item.Cant.00
+                        </th>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col s6">
+        @*<h5>Egresos</h5>
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Egresos)
+                {
+                    <tr>
+                        <th>
+                            @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "detalleEgresos", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleEgresos" })
+                        </th>
+                        <th>
+                            $@item.Cant.00
+                        </th>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>*@
+    </div>
+</div>
+
+
 
 
 

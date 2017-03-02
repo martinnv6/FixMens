@@ -251,6 +251,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminInfoModel.cs" />
+    <Compile Include="Models\FacturaModel.cs" />
     <Compile Include="Models\GananciasParametersModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -376,6 +377,7 @@
     <Content Include="Views\Admin\ArqueoMesAnterior.cshtml" />
     <Content Include="Views\Admin\Conciliar.cshtml" />
     <Content Include="Views\Admin\GetAnticiposEgresos.cshtml" />
+    <Content Include="Views\Admin\DetalleCompras.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

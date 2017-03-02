@@ -30,7 +30,8 @@ namespace FixMens.Controllers
                 EquiposIngresados = Admin.GetEquiposIngresados(),
                 EquiposEntregados = Admin.GetEquiposEntregados(),
                 ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal(),
-                TotalMoneyEntregadosNoFacturados = Admin.GetEquiposEntregadosNoFacturados()
+                TotalMoneyEntregadosNoFacturados = Admin.GetEquiposEntregadosNoFacturados(),
+                Compras = Admin.GetCompras()
                 };
             return View(model);
         }
@@ -106,6 +107,12 @@ namespace FixMens.Controllers
                 tipoConsulta = "Conciliacion",
                 ConciliacionList = Admin.GetConciliacion()
             };
+            return View(model);
+        }
+
+        public ActionResult DetalleCompras(DateTime fecha)
+        {
+            List<DetalleCompras> model = Admin.GetDetalleCompras(fecha);
             return View(model);
         }
     }

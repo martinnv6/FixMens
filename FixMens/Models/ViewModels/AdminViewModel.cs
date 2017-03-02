@@ -9,6 +9,7 @@ namespace FixMens.Models.ViewModels
     {
         public List<AdminInfoModel> EquiposEnTaller { get; set; }
         public List<AdminInfoModel> Ventas { get; set; }
+        public List<AdminInfoModel> Compras { get; set; }
         public List<AdminInfoModel> Egresos { get; set; }
         public List<AdminInfoModel> ReparacionesPorTecnico { get; set; }
         public List<AdminInfoModel> EquiposIngresados { get; set; }
@@ -28,6 +29,18 @@ namespace FixMens.Models.ViewModels
         public float Cantidad { get; set; }
         public string Descripcion { get; set; }
        
+
+
+
+    }
+
+    public class DetalleCompras
+    {
+        public DateTime Fecha { get; set; }
+        public DateTime Hora { get; set; }
+        public float Cantidad { get; set; }
+        public string Descripcion { get; set; }
+
 
 
 

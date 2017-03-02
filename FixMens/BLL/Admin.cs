@@ -6,6 +6,8 @@ using System.Data.Entity.Core.Mapping;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using AutoMapper;
 using FirebirdSql.Data.FirebirdClient;
@@ -753,7 +755,11 @@ namespace FixMens.BLL
                 condition = "And(                                                " +
                             "gastos.DESCRIPCION like '%ANTICIPO%'                " +
                             "or GASTOS.DESCRIPCION LIKE '%anticipo%'             " +
+                            "or GASTOS.DESCRIPCION LIKE '%Pago%'             " +
+                            "or GASTOS.DESCRIPCION LIKE '%pago%'             " +
+                            "or GASTOS.DESCRIPCION LIKE '%PAGO%'             " +
                             "or gastos.Descripcion like '%Anticipo%')            ";
+
             }
 
             cmd.CommandText =
@@ -785,6 +791,69 @@ namespace FixMens.BLL
             }
             return detalle;
             
+        }
+
+        public List<AdminInfoModel> GetCompras()
+        {
+            string stardate = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+
+            var ventas = new List<AdminInfoModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "select COMPRAS.FECHA, SUM(COMPRAS.TOTAL) AS Total "+
+                "from COMPRAS                                      "+
+                "WHERE COMPRAS.FECHA > '"+stardate+"'                "+
+                "GROUP by COMPRAS.FECHA                            "+
+                "ORDER BY COMPRAS.fecha DESC ";                      
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                ventas.Add(new AdminInfoModel
+                {
+                    Description = row[0].ToString(),
+                    Cant = (int)Convert.ToInt64(Convert.ToDouble(row[1].ToString()))
+                });
+            }
+            return ventas;
+        }
+
+        public List<DetalleCompras> GetDetalleCompras(DateTime fecha)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void sendEmailToCreateInvoice(FacturaModel model)
+        {
+            // Command line argument must the the SMTP host.
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            client.Timeout = 10000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("martin.nv6@gmail.com", "Said2011");
+
+            MailMessage mm = new MailMessage("donotreply@domain.com", "martin_nv6@hotmail.com", "test", "test");
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+
+            client.Send(mm);
         }
     }
 
