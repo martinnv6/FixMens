@@ -13,6 +13,7 @@ using AutoMapper;
 using FirebirdSql.Data.FirebirdClient;
 using FixMens.Models;
 using FixMens.Models.ViewModels;
+using Simple.Data.Extensions;
 
 namespace FixMens.BLL
 {
@@ -849,12 +850,30 @@ namespace FixMens.BLL
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential("martin.nv6@gmail.com", "Said2011");
 
-            MailMessage mm = new MailMessage("donotreply@domain.com", "martin_nv6@hotmail.com", "test", "test");
+            var body = "Nombre Fiscal: " + model.nombreFiscal + "\n" +
+                       "Calle y número: " + model.calleynumero + "\n" +
+                       "Colonia: " + model.colonia + "\n" +
+                       "Municipio: " + model.municipio + "\n" +
+                       "Estado: " + model.estado + "\n" +
+                       "CP: " + model.cp + "\n" +
+                       "RFC: " + model.rfc + "\n" +
+                       "Teléfono: " + model.telefono + "\n" +
+                       "Correo: " + model.email + "\n" +
+                       "Ticket/Orden: " + model.ticket + "\n" +
+                       "Comentario: " + model.comentario + "\n" ;
+
+
+
+
+            MailMessage mm = new MailMessage("donotreply@domain.com", "martin_nv6@hotmail.com", "FixMens - Comprobante Fiscal en Proceso", "La factura con los datos: \n\n" + body + "\n\nSe encuentra en proceso con nuestro personal de contabilidad, cualquier duda haremos contacto con usted \n\n\n http://www.fixmens.com.mx (01) 828-284-0220");
+            mm.To.Add(new MailAddress(model.email, model.nombreFiscal));
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
             client.Send(mm);
         }
+
+        public string 
     }
 
 }

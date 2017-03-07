@@ -38,7 +38,7 @@ namespace FixMens.Controllers
         }
 
         [HttpPost]
-        public JsonResult facturar(FacturaModel model)
+        public JsonResult Facturar(FacturaModel model)
         {
             try
             {
