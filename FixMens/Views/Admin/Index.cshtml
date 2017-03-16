@@ -11,6 +11,7 @@
         }
 <a href="@Url.Action("Arqueo", "Admin")" class="waves-effect wave-ligth btn jsArqueos">Arqueos y conciliaciones</a>
 <a href="@Url.Action("GetAnticiposEgresos", "Admin", new {fecha = ""})" class="waves-effect wave-ligth btn jsArqueos">Anticipos</a>
+<a href="@Url.Action("MovementStatus", "Admin")" class="waves-effect wave-ligth btn jsMovementStatus">Mov status de ordenes</a>
         <div class="row">
             <div class="col s6">
                 <h5>Equipos en taller</h5>
@@ -51,7 +52,10 @@
                                 Técnico
                             </th>
                             <th>
-                                Cantidad
+                                Revisados
+                            </th>
+                            <th>
+                                Reparados
                             </th>
                         </tr>
                     </thead>
@@ -64,8 +68,14 @@
 
                                 </th>
                                 <th>
+                                    @item.Cant2
+                                </th>
+                                <th>
                                     @item.Cant
                                 </th>
+                                @*<th>
+                                    @item.Cant2
+                                </th>*@
                             </tr>
 
                         }

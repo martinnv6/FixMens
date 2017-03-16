@@ -44,6 +44,7 @@ function consultarOrden() {
             success: function(data) {
                 $("#detalleOrden").html(data);
                 Materialize.updateTextFields();
+				$('textarea').trigger('autoresize'); //Ajustar tamaño de textareas
             },
             error: function (response) {
                 Materialize.toast(response.responseText, 4000, "red"); // I'm always get this.

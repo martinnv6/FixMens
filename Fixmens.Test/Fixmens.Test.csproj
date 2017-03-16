@@ -54,9 +54,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FixMens\FixMens.csproj">
+    <ProjectReference Include="..\FixMens\FixMens.Web.csproj">
       <Project>{baa409d4-362b-43ce-ac97-91b20387f989}</Project>
-      <Name>FixMens</Name>
+      <Name>FixMens.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

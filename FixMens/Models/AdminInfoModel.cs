@@ -16,5 +16,6 @@ namespace FixMens.Models
         public string Description { get; set; }
         public int Cant { get; set; }
        public int Cant2 { get; set; }
+        public int? Cant3 { get; set; }
     }
 }

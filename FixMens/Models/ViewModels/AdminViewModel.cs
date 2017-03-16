@@ -11,10 +11,10 @@ namespace FixMens.Models.ViewModels
         public List<AdminInfoModel> Ventas { get; set; }
         public List<AdminInfoModel> Compras { get; set; }
         public List<AdminInfoModel> Egresos { get; set; }
-        public List<AdminInfoModel> ReparacionesPorTecnico { get; set; }
+        public List<AdminInfoModelUnion> ReparacionesPorTecnico { get; set; }
         public List<AdminInfoModel> EquiposIngresados { get; set; }
         public List<AdminInfoModel> EquiposEntregados { get; set; }
-        
+
         public List<AdminInfoModelUnion> ReparacionesPorTecnicoSemana { get; set; }
         public float TotalMoneyEntregadosNoFacturados { get; set; }
 
@@ -28,7 +28,7 @@ namespace FixMens.Models.ViewModels
         public DateTime Hora { get; set; }
         public float Cantidad { get; set; }
         public string Descripcion { get; set; }
-       
+
 
 
 
@@ -58,7 +58,7 @@ namespace FixMens.Models.ViewModels
         public char Entregado { get; set; }
         public char Facturado { get; set; }
         public string FechaEntrega { get; set; }
-        public float Total { get; set; }    
+        public float Total { get; set; }
 
     }
 
@@ -87,7 +87,16 @@ namespace FixMens.Models.ViewModels
         public string tipoConsulta { get; set; }
         public List<ArqueoViewModel> ArqueoList { get; set; }
         public List<ConciliacionViewModel> ConciliacionList { get; set; }
-        
+
+    }
+
+    public class MovementStatusViewModel
+    {
+        public TimeSpan HoraMovimiento { get; set; }
+        public DateTime FechaIngreso { get; set; }
+        public string Tecnico { get; set; }
+        public int Codigo { get; set; }
+        public string Status { get; set; }
     }
 
 

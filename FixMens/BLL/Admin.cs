@@ -156,12 +156,12 @@ namespace FixMens.BLL
             return ventas;
         }
 
-        public List<AdminInfoModel> GetReparacionesPorTecnico()
+        public List<AdminInfoModelUnion> GetReparacionesPorTecnico()
         {
 
             var toDay = DateTime.Now;
 
-            var ventas = new List<AdminInfoModel>();
+            var ventas = new List<AdminInfoModelUnion>();
             FbConnection conn = new FbConnection();
             FbDataAdapter da = new FbDataAdapter();
             FbCommand cmd = new FbCommand();
@@ -188,17 +188,24 @@ namespace FixMens.BLL
 
 
             conn.Close();
-
+            var diagnosticados = CountMovementStatus(toDay);
             foreach (DataRow row in dt.Rows)
             {
-                if (row[0].ToString() == "0") continue;
-                ventas.Add(new AdminInfoModel
-                {
-                    Description = row[0].ToString(),
-                    Cant = int.Parse(row[1].ToString())
-                });
+                var revisados = diagnosticados.FirstOrDefault(x => x.Description == row[0].ToString());
+                if (row[0].ToString() == "0" && revisados == null) continue;
+                
+
+                
+                    ventas.Add(new AdminInfoModelUnion
+                    {
+                        Description = row[0].ToString(),
+                        Cant = int.Parse(row[1].ToString()),
+                        Cant2 = revisados?.Cant ?? 0,
+                        Cant3 = 0//int.Parse(row[3].ToString())
+                    });
             }
             return ventas;
+            
         }
 
         public List<ReparacionesModel> GetReparacionesPorTecnico_Detalle(string nombre)
@@ -525,6 +532,7 @@ namespace FixMens.BLL
                 case "Entregados no facturados":
                     condition = "and reparaciones.ENTREGADO = 'S'                                            " +
                     "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
+                    "and reparaciones.FECHA_ENTREGADO >= '2017-02-17'                                              " +
                     "and presupuestos.TOTAL > 0 order by reparaciones.FECHA_ENTREGADO desc ";
                     break;
                 case "NoFacturados"://By Date
@@ -605,6 +613,7 @@ namespace FixMens.BLL
                     "inner join presupuestos on presupuestos.IDREPARACION = reparaciones.codigo    " +
                     "where reparaciones.ENTREGADO = 'S'                                            " +
                     "and PRESUPUESTOS.FACTURADO = 'N'                                              " +
+                    "and reparaciones.FECHA_ENTREGADO >= '2017-02-17'                                              " +
                     "and presupuestos.TOTAL > 0                                                  ";
             cmd.CommandType = CommandType.StoredProcedure;
             conn.Open();
@@ -696,13 +705,14 @@ namespace FixMens.BLL
                     "and Total > 0                                                                          " +
                     "group by reparaciones.FECHA_ENTREGADO                                                  " +
                     ")                                                                                      " +
-                    "SELECT FIRST 100 ARQUEO.FECHA, ARQUEO.IMPORTEINICIAL,                                            " +
+                    "SELECT ARQUEO.FECHA, ARQUEO.IMPORTEINICIAL,                                            " +
                     "ARQUEO.TOTAL, ARQUEO.CALCULADO, ARQUEO.DIFERENCIA,                                     " +
                     "t1.TOTAL NoFacturados                                                                  " +
                     "FROM ARQUEO                                                                            " +
                     "inner join t1 on t1.fecha_entregado = arqueo.FECHA                                     " +
                     "WHERE ARQUEO.CAJA = 1                                                                  " +
                     "AND ARQUEO.CERRADA = 'S'                                                               " +
+                    "AND t1.FECHA_ENTREGADO >= '2017-02-17'                                        " +
                     "ORDER BY ARQUEO.FECHA DESC";
 
             cmd.CommandType = CommandType.Text;
@@ -873,7 +883,126 @@ namespace FixMens.BLL
             client.Send(mm);
         }
 
-        public string 
+        public List<AdminInfoModel> CountMovementStatus(DateTime? fecha)
+        {
+
+            DateTime fecha2;
+
+            if (fecha == null)
+            {
+                fecha2 = DateTime.Now;
+            }
+            else
+            {
+                fecha2 = (DateTime)fecha;
+            }
+            var result = new List<AdminInfoModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "select integrantes.NOMBRES, count(*) from REPARACIONES_HISTORICO_ESTADO        " +
+                "inner join ESTADO on ESTADO.CODIGO = REPARACIONES_HISTORICO_ESTADO.ESTADO                      " +
+                "inner join reparaciones on reparaciones.CODIGO = REPARACIONES_HISTORICO_ESTADO.IDREPARACION    " +
+                "inner join integrantes on integrantes.CODIGO = reparaciones.TECNICO                            " +
+                "where reparaciones_historico_estado.fecha = '" + fecha2.ToString("yyyy-MM-dd") + "' " +
+                "and estado.NOMBRE not in ('Sin Revisar' , 'Reparación Terminada')                              "+
+                "group by integrantes.NOMBRES ";
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                result.Add(new AdminInfoModel
+                {
+                    Description = row[0].ToString(),
+                    Cant = int.Parse(row[1].ToString())
+                    
+                   
+
+                });
+            }
+            return result;
+            
+        }
+
+
+        public List<MovementStatusViewModel> GetMovementStatus(DateTime? fecha)
+        {
+            DateTime fecha2;
+
+            if (fecha == null)
+            {
+                fecha2 = DateTime.Now;
+            }
+            else
+            {
+                fecha2 = (DateTime) fecha;
+            }
+            var result = new List<MovementStatusViewModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                "select reparaciones_historico_estado.hora,reparaciones.FECHAINGRESO, integrantes.NOMBRES, reparaciones.CODIGO, estado.NOMBRE from REPARACIONES_HISTORICO_ESTADO " +
+                "inner join ESTADO on ESTADO.CODIGO = REPARACIONES_HISTORICO_ESTADO.ESTADO " +
+                "inner join reparaciones on reparaciones.CODIGO = REPARACIONES_HISTORICO_ESTADO.IDREPARACION " +
+                "inner join integrantes on integrantes.CODIGO = reparaciones.TECNICO " +
+                "where REPARACIONES_HISTORICO_ESTADO.FECHA = '" + fecha2.ToString("yyyy-MM-dd") + "' " +
+                "and estado.NOMBRE <> 'Sin Revisar' "+
+                "order by reparaciones_historico_estado.hora asc ";
+
+               
+
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+
+
+            da.Fill(dt);
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                result.Add(new MovementStatusViewModel
+                {
+                    HoraMovimiento = TimeSpan.Parse(row[0].ToString()),
+                    FechaIngreso = DateTime.Parse(row[1].ToString()),
+                    Tecnico = row[2].ToString(),
+                    Codigo = int.Parse(row[3].ToString()),
+                    Status = row[4].ToString()
+
+                });
+            }
+            return result;
+        }
     }
 
 }

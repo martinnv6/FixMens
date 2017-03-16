@@ -10,7 +10,7 @@ namespace FixMens.Controllers
 {
     public class AdminController : Controller
     {
-
+        #region MVC
         private Admin _admin;
         internal Admin Admin
         {
@@ -34,6 +34,14 @@ namespace FixMens.Controllers
                 Compras = Admin.GetCompras()
                 };
             return View(model);
+        }
+
+        public ActionResult MovementStatus(DateTime? fecha)
+        {
+            
+            var model = Admin.GetMovementStatus(fecha);
+            return View(model);
+
         }
 
         public ActionResult detalleEgresos(DateTime fecha)
@@ -115,5 +123,27 @@ namespace FixMens.Controllers
             List<DetalleCompras> model = Admin.GetDetalleCompras(fecha);
             return View(model);
         }
+
+        public JsonResult GetApiEquipos()
+        {
+            AdminViewModel model = new AdminViewModel
+            {
+                EquiposEnTaller = Admin.GetTotalesEquiposEnTaller(),
+                Ventas = Admin.GetVentasDia(),
+                Egresos = Admin.GetEgresos(),
+                ReparacionesPorTecnico = Admin.GetReparacionesPorTecnico(),
+                EquiposIngresados = Admin.GetEquiposIngresados(),
+                EquiposEntregados = Admin.GetEquiposEntregados(),
+                ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal(),
+                TotalMoneyEntregadosNoFacturados = Admin.GetEquiposEntregadosNoFacturados(),
+                Compras = Admin.GetCompras()
+            };
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
+    #endregion
+    #region API //Todo: Cambiar a api
+
+   
+    #endregion
 }

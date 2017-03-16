@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens", "FixMens\FixMens.csproj", "{BAA409D4-362B-43CE-AC97-91B20387F989}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens.Web", "FixMens\FixMens.Web.csproj", "{BAA409D4-362B-43CE-AC97-91B20387F989}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixmens.Test", "Fixmens.Test\Fixmens.Test.csproj", "{FD7CB8C6-53BE-4476-901F-543B206EC3E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens.Rest", "FixMens.Rest\FixMens.Rest.csproj", "{720CCC76-AC1C-4130-8722-C9BD8FE0494F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixMens.Service", "FixMens.Service\FixMens.Service.csproj", "{31E7B3E0-99DB-44F9-A6D7-582B5E481598}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "FixMens.Installer", "FixMens.Installer\FixMens.Installer.isproj", "{706CB24A-AC73-48DD-B049-2FA94CC57E47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixmensApi.Rest", "FixmensApi.Rest\FixmensApi.Rest.csproj", "{7585640E-51DB-4179-8D03-1F44FBE2F760}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,16 +42,6 @@ Global
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7CB8C6-53BE-4476-901F-543B206EC3E1}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{720CCC76-AC1C-4130-8722-C9BD8FE0494F}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 		{31E7B3E0-99DB-44F9-A6D7-582B5E481598}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
 		{31E7B3E0-99DB-44F9-A6D7-582B5E481598}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{31E7B3E0-99DB-44F9-A6D7-582B5E481598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -72,6 +62,16 @@ Global
 		{706CB24A-AC73-48DD-B049-2FA94CC57E47}.Release|Any CPU.Build.0 = SingleImage
 		{706CB24A-AC73-48DD-B049-2FA94CC57E47}.SingleImage|Any CPU.ActiveCfg = SingleImage
 		{706CB24A-AC73-48DD-B049-2FA94CC57E47}.SingleImage|Any CPU.Build.0 = SingleImage
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{7585640E-51DB-4179-8D03-1F44FBE2F760}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
