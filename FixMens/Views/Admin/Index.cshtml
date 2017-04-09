@@ -298,7 +298,7 @@
         </table>
     </div>
     <div class="col s6">
-        @*<h5>Egresos</h5>
+        <h5>Ganancias</h5>
         <table class="striped">
             <thead>
                 <tr>
@@ -311,11 +311,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Egresos)
+                @foreach (var item in Model.Ganancias)
                 {
                     <tr>
                         <th>
-                            @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "detalleEgresos", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleEgresos" })
+                            @Html.ActionLink(DateTime.Parse(@item.Description).ToString("dd-MMM-yy (ddd)"), "detalleGanancias", new { fecha = DateTime.Parse(@item.Description) }, new { @class = "lnkDetalleGanancias" })
                         </th>
                         <th>
                             $@item.Cant.00
@@ -325,7 +325,7 @@
                 }
 
             </tbody>
-        </table>*@
+        </table>
     </div>
 </div>
 
@@ -340,6 +340,7 @@
                     $("#btnVentas").click(function () {
                         if ($("#password").val() === "nasa290" || $("#password").val() === "1123581321") {
                             $("#ventas").removeClass("hide");
+                            $("#compras").removeClass("hide");
                             $("#password").addClass("hide");
                             $("#btnVentas").addClass("hide");
                         }

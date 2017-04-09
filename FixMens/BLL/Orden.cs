@@ -13,8 +13,8 @@ namespace FixMens.BLL
     {
         public OrdenModel ConsultarOrden(string nombre, int orden, string admin)
         {
-            
-           var result = getOrden(nombre, orden, admin);
+
+            var result = getOrden(nombre, orden, admin);
             return result;
         }
 
@@ -43,11 +43,12 @@ namespace FixMens.BLL
             //FbParameter pMatricula = new FbParameter();
             cmd.Parameters.Add("pCodigo", cod);
             cmd.Parameters.Add("pNombre", nombre);
-            cmd.CommandText = "SELECT R.CODIGO, C.NOMBRES || ' ' || C.telefono || ' ' || C.celular as NOMBRES,R.FALLA,R.INFORMETALLER,P.DETALLE, P.PRESUPUESTO, I.NOMBRES AS TECNICO " +
-                "FROM REPARACIONES R JOIN CLIENTES C ON R.CLIENTE = C.CODIGO "+
-                "JOIN PRESUPUESTOS P ON R.CODIGO = P.IDREPARACION "+
-                "JOIN INTEGRANTES I ON R.TECNICO = I.CODIGO "+
-                "WHERE R.CODIGO = @pCodigo"+ (admin != "1123581321" ? " AND C.NOMBRES CONTAINING @pNombre": " ");
+            cmd.CommandText = "SELECT R.CODIGO, C.NOMBRES || ' ' || C.telefono || ' ' || C.celular as NOMBRES,R.FALLA,R.INFORMETALLER,P.DETALLE, P.PRESUPUESTO, I.NOMBRES AS TECNICO, R.FECHAINGRESO,R.PROMETIDO,R.FECHATERMINADO, ESTADO.NOMBRE ESTADO " +
+                "FROM REPARACIONES R JOIN CLIENTES C ON R.CLIENTE = C.CODIGO " +
+                "JOIN PRESUPUESTOS P ON R.CODIGO = P.IDREPARACION " +
+                "JOIN INTEGRANTES I ON R.TECNICO = I.CODIGO " +
+                "inner join ESTADO on estado.CODIGO = R.ESTADO "+
+                "WHERE R.CODIGO = @pCodigo" + (admin != "1123581321" ? " AND C.NOMBRES CONTAINING @pNombre" : " ");
             cmd.CommandType = CommandType.Text;
 
 
@@ -58,6 +59,9 @@ namespace FixMens.BLL
 
             if (dt.Rows.Count > 0)
             {
+                DateTime ingreso;
+                DateTime prometido;
+                DateTime entregado;
                 result = new OrdenModel()
                 {
                     NombreCliente = dt.Rows[0]["NOMBRES"].ToString(),
@@ -65,7 +69,12 @@ namespace FixMens.BLL
                     InfoTecnico = dt.Rows[0]["INFORMETALLER"].ToString(),
                     Tecnico = dt.Rows[0]["TECNICO"].ToString(),
                     Presupuesto = dt.Rows[0]["DETALLE"].ToString(),
-                    Precio = "$" + $"{dt.Rows[0]["PRESUPUESTO"]:0,0.00}"
+                    Precio = "$" + $"{dt.Rows[0]["PRESUPUESTO"]:0,0.00}",
+                    FechaIngreso = DateTime.TryParse(dt.Rows[0]["FECHAINGRESO"].ToString(), out ingreso) ? ingreso : (DateTime?)null,
+                    FechaPrometido = DateTime.TryParse(dt.Rows[0]["PROMETIDO"].ToString(), out prometido) ? prometido : (DateTime?)null,
+                    FechaEntregado = DateTime.TryParse(dt.Rows[0]["FECHATERMINADO"].ToString(), out entregado) ? entregado : (DateTime?)null,
+                    Estado = dt.Rows[0]["ESTADO"].ToString(),
+
                 };
                 //txtOrden.Text = dt.Rows[0]["CODIGO"].ToString();
                 //txtNombreCliente.Text = dt.Rows[0]["NOMBRES"].ToString();

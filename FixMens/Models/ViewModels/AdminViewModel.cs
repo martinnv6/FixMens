@@ -10,6 +10,7 @@ namespace FixMens.Models.ViewModels
         public List<AdminInfoModel> EquiposEnTaller { get; set; }
         public List<AdminInfoModel> Ventas { get; set; }
         public List<AdminInfoModel> Compras { get; set; }
+        public List<AdminInfoModel> Ganancias { get; set; }
         public List<AdminInfoModel> Egresos { get; set; }
         public List<AdminInfoModelUnion> ReparacionesPorTecnico { get; set; }
         public List<AdminInfoModel> EquiposIngresados { get; set; }
@@ -20,6 +21,13 @@ namespace FixMens.Models.ViewModels
 
 
 
+    }
+
+    public class Totales
+    {
+        public float Compras { get; set;}
+        public float Ventas { get; set; }
+        public float Ganancias { get; set; }
     }
 
     public class DetalleEgresos
@@ -36,10 +44,16 @@ namespace FixMens.Models.ViewModels
 
     public class DetalleCompras
     {
-        public DateTime Fecha { get; set; }
-        public DateTime Hora { get; set; }
-        public float Cantidad { get; set; }
+        public DateTime Fecha { get; set; }        
+        public string SerieYNumero { get; set; }
+        public string Proveedor { get; set; }
+        public int Cantidad { get; set; }
         public string Descripcion { get; set; }
+        public float CostoU { get; set; }
+        public float Total { get; set; }
+        public float Precio { get; set; }
+        public int Stock { get; set; }
+
 
 
 

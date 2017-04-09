@@ -1,0 +1,60 @@
+﻿
+@model List<FixMens.Models.ViewModels.MovementStatusViewModel>
+<!-- Modal Structure -->
+
+
+
+<div class="col s12">
+    <h4>Detalle Egresos</h4>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>
+                Hora de movimiento
+            </th>
+            <th>
+                Fecha ingreso
+            </th>
+            <th>
+                Técnico
+            </th>
+            <th>
+                # Orden
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.HoraMovimiento.ToString().Substring(0, 5)
+                    </th>
+                    <th>
+                        @item.FechaIngreso.ToShortDateString()
+                    </th>
+                    <th>
+                        @item.Tecnico
+                    </th>
+                    <th>
+                        @item.Codigo
+                    </th>
+                    <th>
+                        @item.Status
+                    </th>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+

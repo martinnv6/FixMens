@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Totales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Totales</h2>
+
+@model FixMens.Models.ViewModels.Totales
+<!-- Modal Structure -->
+
+
+
+<div class="col s12">
+    <h4>Detalle de compras</h4>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>
+                    Compras
+                </th>
+                <th>
+                    Ventas
+                </th>
+                <th>
+                    Ganancia
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.Fecha.ToShortDateString()
+                    </th>
+                    <th>
+                        @item.SerieYNumero
+                    </th>
+                    <th>
+                        @item.Proveedor
+                    </th>
+                   
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+

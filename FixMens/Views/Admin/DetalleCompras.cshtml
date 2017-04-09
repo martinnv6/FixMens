@@ -1,1 +1,89 @@
 ﻿
+@model List<FixMens.Models.ViewModels.DetalleCompras>
+<!-- Modal Structure -->
+
+
+
+<div class="col s12">
+    <h4>Detalle de compras</h4>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Serie-Numero
+                </th>
+                <th>
+                    Proveedor
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Costo
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Precio venta
+                </th>
+                <th>
+                    Stock
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.Fecha.ToShortDateString()
+                    </th>
+                    <th>
+                        @item.SerieYNumero
+                    </th>
+                    <th>
+                        @item.Proveedor
+                    </th>
+                    <th>
+                        @item.Cantidad
+                    </th>
+                    <th>
+                        @item.Descripcion
+                    </th>
+                    <th>
+                        $@Math.Round(@item.CostoU, 2)
+                    </th>
+                    <th>
+                       $@Math.Round(@item.Total, 2)
+                    </th>
+                    <th>
+                       $@Math.Round(@item.Precio, 2)
+                    </th>
+                    <th>
+                        @item.Stock
+                    </th>
+                    
+
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+

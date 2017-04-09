@@ -845,7 +845,61 @@ namespace FixMens.BLL
 
         public List<DetalleCompras> GetDetalleCompras(DateTime fecha)
         {
-            throw new NotImplementedException();
+            List<DetalleCompras> detalle = new List<DetalleCompras>();
+
+
+
+
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+
+            cmd.CommandText =
+                " select  " +
+                "compras.FECHA, " +
+                "comprasdet.SERIE, comprasdet.NUMERO, PROVEEDORES.NOMBRE , " +
+                "comprasdet.CANTIDAD, comprasdet.DESCRIPCION, comprasdet.PRECIO, " +
+                "comprasdet.TOTAL, articulos.PRECIOCONTADO_P, articulos.EXISTENCIA " +
+                "from comprasdet                                                  " +
+                "inner join compras on compras.SERIE = comprasdet.serie           " +
+                "and compras.numero = comprasdet.numero                           " +
+                "and compras.proveedor = comprasdet.proveedor                     " +
+                "inner join PROVEEDORES on proveedores.codigo = COMPRASDET.PROVEEDOR " +
+                "inner join ARTICULOS on articulos.CODIGO = comprasdet.ARTICULO     " +
+                "where fecha = '" + fecha.ToString("yyyy-MM-dd") + "' ";
+               
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                detalle.Add(new DetalleCompras()
+                {
+                    Fecha = DateTime.Parse(row[0].ToString()),   
+                    SerieYNumero                 = row[1] + "-" + row[2],
+                    Proveedor = row[3].ToString(),
+                    Cantidad = int.Parse(row[4].ToString()),
+                    Descripcion = row[5].ToString(),
+                    CostoU = float.Parse(row[6].ToString()),
+                    Total = float.Parse(row[7].ToString()),
+                    Precio = float.Parse(row[8].ToString()),
+                    Stock = int.Parse(row[9].ToString())
+                    
+                });
+            }
+            return detalle;
+
         }
 
         public static void sendEmailToCreateInvoice(FacturaModel model)
@@ -1002,6 +1056,56 @@ namespace FixMens.BLL
                 });
             }
             return result;
+        }
+
+        public List<AdminInfoModel> Ganancias()
+        {
+            string stardate = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+
+            var ventas = new List<AdminInfoModel>();
+            FbConnection conn = new FbConnection();
+            FbDataAdapter da = new FbDataAdapter();
+            FbCommand cmd = new FbCommand();
+            DataTable dt = new DataTable();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["firebirdConnection"].ToString();
+            cmd.Connection = conn;
+
+            //ToDo: Esta es la manera con la que el sistema ingresa en campo la utilidad, pero debe calcularse para el caso de FixMens
+            cmd.CommandText =
+                "select ventas.fecha, sum(ventasdet.UTILIDAD) from VENTASDET "+
+                "inner join ventas on ventasdet.SERIE = ventas.SERIE and ventasdet.NUMERO = ventas.NUMERO "+
+                "where ventas.fecha > '" + stardate + "' " +                                                                                       
+                "group by ventas.fecha                                                                   "+
+                "order by ventas.fecha desc                                                             ";
+              
+
+            cmd.CommandType = CommandType.Text;
+
+
+            conn.Open();
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+
+
+
+            conn.Close();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row[0].ToString() == "0") continue;
+                ventas.Add(new AdminInfoModel
+                {
+                    Description = row[0].ToString(),
+                    Cant = (int)Convert.ToInt64(Convert.ToDouble(row[1].ToString()))
+                });
+            }
+            return ventas;
+        }
+
+        public Totales GetTotales()
+        {
+            Totales total = new Totales();
+            
         }
     }
 

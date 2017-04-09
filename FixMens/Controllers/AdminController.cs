@@ -31,8 +31,17 @@ namespace FixMens.Controllers
                 EquiposEntregados = Admin.GetEquiposEntregados(),
                 ReparacionesPorTecnicoSemana = Admin.GetReparacionesPorTecnicoSemanal(),
                 TotalMoneyEntregadosNoFacturados = Admin.GetEquiposEntregadosNoFacturados(),
-                Compras = Admin.GetCompras()
+                Compras = Admin.GetCompras(),
+                Ganancias = Admin.Ganancias()
+
                 };
+            return View(model);
+        }
+
+        public ActionResult Totales(DateTime? fechaInicio, DateTime? fechaFin)
+        {
+            Totales model = Admin.GetTotales();
+
             return View(model);
         }
 
@@ -139,6 +148,11 @@ namespace FixMens.Controllers
                 Compras = Admin.GetCompras()
             };
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DetalleGanancias(DateTime fecha)
+        {
+            throw new NotImplementedException();
         }
     }
     #endregion

@@ -7,6 +7,24 @@
     if (@Model.NombreCliente != null)
     {
         <div class="row">
+            <div class="input-field col s3">
+                <input readonly id="nombre" type="text" value="@Model.FechaIngreso">
+                <label for="infoTecnico">Ingreso</label>
+            </div>
+            <div class="input-field col s3">
+                <input readonly id="nombre" type="text" value="@Model.FechaPrometido">
+                <label for="infoTecnico">Prometido</label>
+            </div>
+            <div class="input-field col s3">
+                <input readonly id="nombre" type="text" value="@Model.FechaEntregado">
+                <label for="infoTecnico">Entregado</label>
+            </div>
+            <div class="input-field col s3">
+                <input readonly id="nombre" type="text" value="@Model.Estado">
+                <label for="infoTecnico">Estado</label>
+            </div>
+        </div>
+        <div class="row">
             <div class="input-field col s12">
                 <input readonly id="nombre" type="text" value="@Model.NombreCliente">
                 <label for="infoTecnico">Nombre</label>

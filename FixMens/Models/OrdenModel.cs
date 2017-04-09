@@ -14,5 +14,10 @@ namespace FixMens.Models
         public string Tecnico { get; set; }
         public string Precio { get; set; }
         public string ErrorMessage { get; set; }
+        public DateTime? FechaIngreso { get; set; }
+        public DateTime? FechaPrometido { get; set; }
+        public DateTime? FechaEntregado { get; set; }
+        public string Estado { get; set; }
+
     }
 }
