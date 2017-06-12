@@ -1105,7 +1105,8 @@ namespace FixMens.BLL
         public Totales GetTotales()
         {
             Totales total = new Totales();
-            
+            return null;
+
         }
     }
 
