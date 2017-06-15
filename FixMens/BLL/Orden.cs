@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using FirebirdSql.Data.FirebirdClient;
 using FixMens.Models;
+using FixMens.Repository;
+
 
 namespace FixMens.BLL
 {
@@ -20,6 +22,7 @@ namespace FixMens.BLL
 
         private OrdenModel getOrden(string nombre, int orden, string admin)
         {
+           
             OrdenModel result = new OrdenModel(); //Para validar cuando no se encontro orden
             //Validación nombre mas de 5 caracteres.
             if (nombre.Length < 5)
@@ -89,6 +92,8 @@ namespace FixMens.BLL
             {
                 result.ErrorMessage = "Orden no encontrada";
             }
+
+
             return result;
         }
     }

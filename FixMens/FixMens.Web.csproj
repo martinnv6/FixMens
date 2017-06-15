@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,57 +48,89 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework.Firebird, Version=5.8.0.0, Culture=neutral, PublicKeyToken=42d22d092898e5f8, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.Firebird.5.8.0\lib\net452\EntityFramework.Firebird.dll</HintPath>
+    <Reference Include="EntityFramework.Firebird, Version=5.9.1.0, Culture=neutral, PublicKeyToken=42d22d092898e5f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Firebird.5.9.1\lib\net452\EntityFramework.Firebird.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=5.8.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.5.8.0\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=5.9.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.5.9.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.3.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.3.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.3.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.3.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.3.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -187,32 +219,8 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0-beta1\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.3.0-beta1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.3.0-beta1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.3.0-beta1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.3.0-beta1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.3.0-beta1\lib\net45\Microsoft.AI.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -248,12 +256,15 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="BLL\Admin.cs" />
     <Compile Include="BLL\Orden.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CargaInicialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="DAL\Base.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -267,6 +278,97 @@
     <Compile Include="Models\OrdenModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ACCESORIOS.cs" />
+    <Compile Include="Repository\ALMACEN_FALLAS.cs" />
+    <Compile Include="Repository\ALQUILER_EQUIPOS.cs" />
+    <Compile Include="Repository\APARATO.cs" />
+    <Compile Include="Repository\APARATO_MOTOR_ELEC.cs" />
+    <Compile Include="Repository\AREASVENTA.cs" />
+    <Compile Include="Repository\ARQUEO.cs" />
+    <Compile Include="Repository\ARTICULOS.cs" />
+    <Compile Include="Repository\BANCOS.cs" />
+    <Compile Include="Repository\BANCOS_CHEQUERAS.cs" />
+    <Compile Include="Repository\BANCOS_CHEQUES_CARTERA.cs" />
+    <Compile Include="Repository\BANCOS_CHEQUES_EMITIDOS.cs" />
+    <Compile Include="Repository\BANCOS_CUENTAS.cs" />
+    <Compile Include="Repository\BANCOS_MOVIMIENTOS.cs" />
+    <Compile Include="Repository\BANCOS_PARTICULARES.cs" />
+    <Compile Include="Repository\CAJAS.cs" />
+    <Compile Include="Repository\CAMBIOS_EQUIPOS.cs" />
+    <Compile Include="Repository\CATEGORIAS.cs" />
+    <Compile Include="Repository\CLIENTES.cs" />
+    <Compile Include="Repository\CLIENTES_SUCURSALES.cs" />
+    <Compile Include="Repository\COMPRAS.cs" />
+    <Compile Include="Repository\COMPRASDET.cs" />
+    <Compile Include="Repository\COMPRA_EQUIPOS.cs" />
+    <Compile Include="Repository\COSTOS_SERVICIOS.cs" />
+    <Compile Include="Repository\COTIZACIONES.cs" />
+    <Compile Include="Repository\CUOTAS.cs" />
+    <Compile Include="Repository\DEPARTSTOCK.cs" />
+    <Compile Include="Repository\DETALLEVENTAS.cs" />
+    <Compile Include="Repository\DOCUMENTOS.cs" />
+    <Compile Include="Repository\EMPRESA.cs" />
+    <Compile Include="Repository\EQUIPOS_CLIENTES.cs" />
+    <Compile Include="Repository\EQUIPOS_EMPRESA.cs" />
+    <Compile Include="Repository\EQUIPOS_PRESTAMO.cs" />
+    <Compile Include="Repository\ESTADO.cs" />
+    <Compile Include="Repository\ESTADOPRESUP.cs" />
+    <Compile Include="Repository\ESTADO_SERVICE_DOMICILIO.cs" />
+    <Compile Include="Repository\FACTURAS.cs" />
+    <Compile Include="Repository\FICHAMOVIMENTS.cs" />
+    <Compile Include="Repository\FICHAOPERACIONES.cs" />
+    <Compile Include="Repository\FICHAPROVEEDORES.cs" />
+    <Compile Include="Repository\FICHAS_MOTORES_MONOFASICOS.cs" />
+    <Compile Include="Repository\FICHAS_MOTORES_TRIFASICOS.cs" />
+    <Compile Include="Repository\fixmensModel.cs" />
+    <Compile Include="Repository\FORMASPAGO.cs" />
+    <Compile Include="Repository\GASTOS.cs" />
+    <Compile Include="Repository\IMPUESTOS.cs" />
+    <Compile Include="Repository\INTEGRANTES.cs" />
+    <Compile Include="Repository\INVENTARIO.cs" />
+    <Compile Include="Repository\INVENTARIODET.cs" />
+    <Compile Include="Repository\MARCA.cs" />
+    <Compile Include="Repository\MEDIDAS_POTENCIA.cs" />
+    <Compile Include="Repository\MEDIOSPAGO.cs" />
+    <Compile Include="Repository\MESES.cs" />
+    <Compile Include="Repository\MODELO.cs" />
+    <Compile Include="Repository\MONEDAS.cs" />
+    <Compile Include="Repository\MORA.cs" />
+    <Compile Include="Repository\NUMERADORES.cs" />
+    <Compile Include="Repository\ORDENES_FOTOS_EQUIPOS.cs" />
+    <Compile Include="Repository\PAGOS.cs" />
+    <Compile Include="Repository\PERMISOS.cs" />
+    <Compile Include="Repository\PERMISOSPVPADMIN.cs" />
+    <Compile Include="Repository\PRESUPUESTOS.cs" />
+    <Compile Include="Repository\PRESUPUESTOS_HISTORICO_ESTADO.cs" />
+    <Compile Include="Repository\PRESUPUESTOS_MANO_OBRA.cs" />
+    <Compile Include="Repository\PRESUPUESTOS_MATERIALES.cs" />
+    <Compile Include="Repository\PRESUPUESTOS_VARIOS.cs" />
+    <Compile Include="Repository\PROVEEDORES.cs" />
+    <Compile Include="Repository\RECIBOS.cs" />
+    <Compile Include="Repository\RECIBOS_FACTURAS.cs" />
+    <Compile Include="Repository\REPARACIONES.cs" />
+    <Compile Include="Repository\REPARACIONESREMITOS.cs" />
+    <Compile Include="Repository\REPARACIONES_HISTORICO_ESTADO.cs" />
+    <Compile Include="Repository\REPARACIONES_LOG.cs" />
+    <Compile Include="Repository\REPARACIONES_NOTAS.cs" />
+    <Compile Include="Repository\RMA.cs" />
+    <Compile Include="Repository\RUBROS.cs" />
+    <Compile Include="Repository\SERVICE_A_DOMICILIO.cs" />
+    <Compile Include="Repository\SERVICE_HISTORICO_ESTADO.cs" />
+    <Compile Include="Repository\SERVICIOS_LOG.cs" />
+    <Compile Include="Repository\SERVICIOS_NOTAS.cs" />
+    <Compile Include="Repository\SITUACIONES.cs" />
+    <Compile Include="Repository\SUBUBICACIONES.cs" />
+    <Compile Include="Repository\TAREAS.cs" />
+    <Compile Include="Repository\TIPOSCOMPROBANTES.cs" />
+    <Compile Include="Repository\TIPO_APARATO.cs" />
+    <Compile Include="Repository\TIPO_RED.cs" />
+    <Compile Include="Repository\UBICACIONES.cs" />
+    <Compile Include="Repository\USUARIOS.cs" />
+    <Compile Include="Repository\VENTAS.cs" />
+    <Compile Include="Repository\VENTASDET.cs" />
+    <Compile Include="Repository\VENTA_EQUIPOS.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -393,7 +495,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\roboto\" />
-    <Folder Include="Repository\" />
     <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
@@ -444,8 +545,9 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.2.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
 </Project>

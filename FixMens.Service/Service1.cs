@@ -20,24 +20,52 @@ namespace FixMens.Service
 
         protected override void OnStart(string[] args)
         {
-            // Command line argument must the the SMTP host.
-            SmtpClient client = new SmtpClient();
-            client.Port = 587;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;
-            client.Timeout = 10000;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("martin.nv6@gmail.com", "Said2011");
-
-            MailMessage mm = new MailMessage("donotreply@domain.com", "martin_nv6@hotmail.com", "test", "test");
-            mm.BodyEncoding = UTF8Encoding.UTF8;
-            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-            client.Send(mm);
+            //Timer para el control del tiempo entre llamadas.
+            var myTimer = new System.Timers.Timer();
+            //Intervalo de tiempo entre llamadas.
+            myTimer.Interval = 1500;
+            //Evento a ejecutar cuando se cumple el tiempo.
+               // myTimer.Elapsed += new System.Timers.ElapsedEventHandler(myTimer_Elapsed);
+                //Habilitar el Timer.
+                 myTimer.Enabled = true;
         }
 
-        protected override void OnStop()
+        //void myTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        //    {
+        //        //Detiene el Timer
+        //        myTimer.Enabled = false;
+        //        //llama al Servicio Web
+        //        CallServicioWeb();
+        //        //habilita el Timer nuevamente.
+        //        myTimer.Enabled = true;
+        //    }
+
+        //void CallServicioWeb()
+        //   {
+        //       //Proxy
+        //       SerivicioWeb.GeoIPService Proxy = new ServicioWindowsMonitor.SerivicioWeb.GeoIPService();
+        //       DateTime Tini;
+        //       TimeSpan Tdif;
+        //       try
+        //       {
+        //           //Tiempo de inicio de la llamada
+        //            Tini = DateTime.Now;
+        //            //llamada al servicio 
+        //            Proxy.GetGeoIP("200.10.12.126");
+        //            //Tiempo de respuesta
+        //            Tdif=Tini.Subtract(DateTime.Now);
+        //            if (Tdif.Seconds< -10)
+        //             {
+        //                 Log("Servicio Lento: " + Tdif.Seconds.ToString()+ "[S]");
+        //             }
+        //        }
+        //    catch (Exception X)
+        //    {
+             
+        //            Log(X.Message);
+        //        }
+        //    }
+    protected override void OnStop()
         {
         }
     }
