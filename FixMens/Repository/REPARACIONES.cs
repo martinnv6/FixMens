@@ -152,6 +152,7 @@ namespace FixMens.Repository
         public virtual ICollection<CAMBIOS_EQUIPOS> CAMBIOS_EQUIPOS { get; set; }
 
         public virtual CLIENTES_SUCURSALES CLIENTES_SUCURSALES { get; set; }
+        public virtual CLIENTES CLIENTES { get; set; }
 
         public virtual FICHAS_MOTORES_MONOFASICOS FICHAS_MOTORES_MONOFASICOS { get; set; }
 

@@ -395,6 +395,12 @@ namespace FixMens.Repository
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CLIENTES>()
+                .HasMany(e => e.REPARACIONES)
+                .WithRequired(e => e.CLIENTES)
+                .HasForeignKey(e => e.CLIENTE)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CLIENTES>()
                 .HasMany(e => e.PRESUPUESTOS_VARIOS)
                 .WithOptional(e => e.CLIENTES)
                 .HasForeignKey(e => e.CLIENTE);

@@ -1,0 +1,403 @@
+﻿@model FixMens.Repository.REPARACIONES
+
+@{
+    ViewBag.Title = "OrdenesPorCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OrdenesPorCliente</h2>
+
+<div>
+    <h4>REPARACIONES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AREASVENTA.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AREASVENTA.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTES_SUCURSALES.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTES_SUCURSALES.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FICHAS_MOTORES_MONOFASICOS.FRECUENCIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FICHAS_MOTORES_MONOFASICOS.FRECUENCIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FICHAS_MOTORES_TRIFASICOS.CONEXION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FICHAS_MOTORES_TRIFASICOS.CONEXION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TAREAS.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAREAS.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UBICACIONES.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UBICACIONES.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UBICACIONES1.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UBICACIONES1.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FALLA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FALLA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OBSERVACIONES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBSERVACIONES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROMETIDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROMETIDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHAINGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHAINGRESO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HORAINGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORAINGRESO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RECEPCIONADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RECEPCIONADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TECNICO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TECNICO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INFORMETALLER)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INFORMETALLER)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHATERMINADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHATERMINADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HORATERMINADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORATERMINADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ENTREGADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ENTREGADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AVISADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AVISADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BATERIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BATERIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BATERIA_ORIG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BATERIA_ORIG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARGADOR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARGADOR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARGADOR_ORIG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARGADOR_ORIG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROMETIDO_HORA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROMETIDO_HORA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CHIP_NS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHIP_NS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ORDEN_CLI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORDEN_CLI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLI_NOMBRE_EVENTUAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLI_NOMBRE_EVENTUAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TEL_EVENTUAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEL_EVENTUAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLI_EVENTUAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLI_EVENTUAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ENTREGADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ENTREGADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE_GARANTIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE_GARANTIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAMPOLIBRE1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAMPOLIBRE1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAMPOLIBRE2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAMPOLIBRE2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GARANTIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GARANTIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_AUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_AUD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HORA_AUD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORA_AUD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GARANTIA_FECHA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GARANTIA_FECHA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GARANTIA_FACTURA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GARANTIA_FACTURA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SITUACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SITUACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REMITO_ENTREGADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REMITO_ENTREGADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.REMITO_INGRESO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.REMITO_INGRESO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BARCODE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BARCODE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ARTICULO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ARTICULO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CODIGO }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

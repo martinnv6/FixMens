@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FixMens.BLL;
 using FixMens.Models.ViewModels;
+using FixMens.Repository;
 
 namespace FixMens.Controllers
 {
@@ -153,6 +155,32 @@ namespace FixMens.Controllers
         public ActionResult DetalleGanancias(DateTime fecha)
         {
             throw new NotImplementedException();
+        }
+
+        public ActionResult OrdenesPorCliente(string nombre)
+        {
+            //List<ReparacionesModel> listModel = new List<ReparacionesModel>();
+
+            //fixmensModel dbModel = new fixmensModel();
+            //var reparaciones = dbModel.REPARACIONES.Where(x => x.CLIENTES.NOMBRES.Contains(nombre));
+
+
+            //foreach (var x in reparaciones)
+            //{
+            //    ReparacionesModel model = new ReparacionesModel();
+            //    model.Codigo = x.CODIGO;
+            //    model.Codigo = 
+
+            //}
+               
+
+            
+            
+
+            
+            
+
+            return View();
         }
     }
     #endregion

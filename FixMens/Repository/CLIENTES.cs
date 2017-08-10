@@ -17,6 +17,7 @@ namespace FixMens.Repository
             VENTA_EQUIPOS = new HashSet<VENTA_EQUIPOS>();
             CLIENTES_SUCURSALES = new HashSet<CLIENTES_SUCURSALES>();
             PRESUPUESTOS_VARIOS = new HashSet<PRESUPUESTOS_VARIOS>();
+            REPARACIONES = new HashSet<REPARACIONES>();
         }
 
         [Key]
@@ -77,6 +78,7 @@ namespace FixMens.Repository
         [StringLength(40)]
         public string PASSWORD { get; set; }
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ALQUILER_EQUIPOS> ALQUILER_EQUIPOS { get; set; }
 
@@ -91,5 +93,7 @@ namespace FixMens.Repository
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRESUPUESTOS_VARIOS> PRESUPUESTOS_VARIOS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REPARACIONES> REPARACIONES { get; set; }
     }
 }
